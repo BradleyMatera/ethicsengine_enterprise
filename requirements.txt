@@ -1,0 +1,9 @@
+streamlit
+pydantic
+pydantic-settings # For BaseSettings in config
+pyautogen==0.8.5  # AG2 v0.8.5 specified in FSD
+pyyaml
+python-dotenv
+requests
+openai # For OpenAI Moderation API and potentially other OpenAI calls
+# Add other dependencies as needed, e.g., for specific guardrail classifiers or datasets
