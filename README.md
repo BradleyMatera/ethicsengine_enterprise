@@ -58,6 +58,24 @@ python3 run_pipeline.py bench_q1
 
 Results will be saved as JSON files in the `results/` directory.
 
+### Running the API and UI
+
+The project includes a FastAPI backend and a Streamlit frontend for interacting with pipelines.
+
+1.  **Start the FastAPI Backend:**
+    Ensure all dependencies are installed (`pip install -r requirements.txt`). Run the Uvicorn server from the project root:
+    ```bash
+    uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    ```
+    The `--reload` flag automatically restarts the server when code changes are detected (useful for development). The API documentation will be available at `http://localhost:8000/docs`.
+
+2.  **Start the Streamlit UI:**
+    In a **separate terminal**, navigate to the project root and run:
+    ```bash
+    streamlit run ui/app.py
+    ```
+    This will open the Streamlit application in your web browser, allowing you to interact with the API to manage and monitor pipeline runs.
+
 ### Data Ingestion
 
 Use scripts in the `scripts/` directory to ingest data from source datasets (like those listed in the FSD Appendix) into the pipeline format.

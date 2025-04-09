@@ -119,19 +119,21 @@ class EthicsEngine:
                         f"{len(self._guardrails)} guardrails.")
 
 
-    async def run_pipeline(self, pipeline: Pipeline) -> Results: # Make method async
+    async def run_pipeline(self, pipeline: Pipeline, run_id: str) -> Results: # Accept run_id
         """
-        Executes a given pipeline configuration asynchronously.
+        Executes a given pipeline configuration asynchronously using the provided run_id.
 
         Args:
             pipeline: The Pipeline object defining the run.
+            run_id: The unique identifier for this specific run, provided by the caller.
 
         Returns:
             A Results object containing the outcome of the run.
         """
-        run_id = f"run_{uuid.uuid4()}"
+        # Use the provided run_id instead of generating a new one
+        # run_id = f"run_{uuid.uuid4()}" # Removed internal generation
         start_time = datetime.now(timezone.utc)
-        logger.info(f"Starting pipeline run: {run_id} (Pipeline ID: {pipeline.id})")
+        logger.info(f"Starting pipeline run: {run_id} (Pipeline ID: {pipeline.id})") # Log the provided run_id
 
         interactions: List[Interaction] = []
         violations: List[ResultViolation] = []

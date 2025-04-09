@@ -342,3 +342,656 @@ ValueError: Invalid reasoning method specified: 'MCTS'. Should be one of 'beam_s
 2025-04-07 12:14:42,967 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Signaling monitoring thread to stop...
 2025-04-07 12:14:43,228 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread finished.
 2025-04-07 12:14:43,228 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread stopped cleanly.
+2025-04-09 13:07:17,490 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:07:49,331 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:08:17,505 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:08:17,505 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:08:17,505 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:08:17,506 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:08:17,507 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:08:17,507 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:08:17,508 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:08:17,509 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:08:17,509 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:08:17,509 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:08:17,509 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:08:17,513 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:08:20,441 - api.main - INFO - Request: GET /
+2025-04-09 13:08:20,442 - api.main - INFO - Response: 200
+2025-04-09 13:08:21,085 - api.main - INFO - Request: GET /favicon.ico
+2025-04-09 13:08:21,085 - api.main - INFO - Response: 404
+2025-04-09 13:08:37,180 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:08:55,850 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:08:55,851 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:08:55,851 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:08:55,854 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:08:55,855 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:08:55,855 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:08:55,857 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:08:55,857 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:08:55,857 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:08:55,857 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:08:55,857 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:08:55,862 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:09:03,553 - api.main - INFO - Request: GET /docs
+2025-04-09 13:09:03,554 - api.main - INFO - Response: 200
+2025-04-09 13:09:03,891 - api.main - INFO - Request: GET /openapi.json
+2025-04-09 13:09:03,916 - api.main - INFO - Response: 200
+2025-04-09 13:09:18,052 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:09:18,053 - api.main - INFO - Response: 200
+2025-04-09 13:09:58,955 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:09:58,955 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:09:58,956 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:09:58,956 - api.main - INFO - Response: 200
+2025-04-09 13:10:41,809 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:10:41,809 - api.main - INFO - Response: 200
+2025-04-09 13:11:47,673 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:11:47,674 - api.main - INFO - Response: 200
+2025-04-09 13:12:01,060 - api.main - INFO - Request: GET /results/
+2025-04-09 13:12:01,060 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:12:01,060 - api.routers.results - INFO - Found 8 pipeline result files.
+2025-04-09 13:12:01,061 - api.main - INFO - Response: 200
+2025-04-09 13:12:12,875 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:15:37,469 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:15:37,469 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:15:37,469 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:15:37,469 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:15:37,469 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:15:37,470 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:15:37,471 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:15:37,472 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:15:37,472 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:15:37,472 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:15:37,472 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:15:37,477 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:15:41,145 - api.main - INFO - Request: GET /docs
+2025-04-09 13:15:41,145 - api.main - INFO - Response: 200
+2025-04-09 13:15:41,203 - api.main - INFO - Request: GET /openapi.json
+2025-04-09 13:15:41,218 - api.main - INFO - Response: 200
+2025-04-09 13:15:46,285 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:15:46,285 - api.main - INFO - Response: 200
+2025-04-09 13:16:08,467 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:16:08,467 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:16:08,468 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:16:08,468 - api.main - INFO - Response: 200
+2025-04-09 13:16:31,176 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:16:31,179 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:16:31,179 - api.routers.pipelines - ERROR - Error loading or validating pipeline definition 'concurrency_test_pipeline' from /home/emoore/ethicsengine_enterprise/data/pipelines/concurrency_test_pipeline.json: 'Pipeline' object has no attribute 'pipeline_id'
+Traceback (most recent call last):
+  File "/home/emoore/ethicsengine_enterprise/api/routers/pipelines.py", line 252, in run_existing_pipeline
+    logger.info(f"Successfully loaded pipeline definition: {pipeline.pipeline_id}")
+                                                            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/emoore/.local/lib/python3.12/site-packages/pydantic/main.py", line 828, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Pipeline' object has no attribute 'pipeline_id'
+2025-04-09 13:16:31,184 - api.main - INFO - Response: 422
+2025-04-09 13:16:44,188 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:17:33,698 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:17:33,698 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:17:33,698 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:17:33,698 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:17:33,699 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:17:33,699 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:17:33,700 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:17:33,700 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:17:33,700 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:17:33,700 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:17:33,700 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:17:33,705 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:17:41,752 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:17:41,755 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:17:41,755 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:17:41,755 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:17:41,755 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:17:41,759 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:17:41,759 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_2d5e8c5524a24d7f9491f5e453381c5b) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:17:41,760 - api.main - INFO - Response: 202
+2025-04-09 13:17:53,158 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:17:53,159 - api.main - INFO - Response: 200
+2025-04-09 13:18:22,876 - api.main - INFO - Request: GET /pipelines/status/run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:18:22,884 - api.routers.pipelines - INFO - Checking status for run_id: run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:18:35,955 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:19:05,711 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:19:05,711 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:19:05,711 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:19:05,711 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:19:05,712 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:19:05,712 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:19:05,714 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:19:05,714 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:19:05,714 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:19:05,714 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:19:05,714 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:19:05,719 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:19:11,437 - api.main - INFO - Request: GET /pipelines/status/run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:19:11,437 - api.routers.pipelines - INFO - Checking status for run_id: run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:19:20,559 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:19:55,464 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:19:55,464 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:19:55,464 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:19:55,464 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:19:55,464 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:19:55,465 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:19:55,465 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:19:55,465 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:19:55,465 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:19:55,465 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:19:55,465 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:19:55,470 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:20:04,521 - api.main - INFO - Request: GET /pipelines/status/run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:20:04,521 - api.routers.pipelines - INFO - Checking status for run_id: run_2d5e8c5524a24d7f9491f5e453381c5b
+2025-04-09 13:20:04,523 - api.routers.pipelines - INFO - Status for run_2d5e8c5524a24d7f9491f5e453381c5b: NOT_FOUND (start marker not found in logs)
+2025-04-09 13:20:04,523 - api.routers.pipelines - INFO - Status for run_2d5e8c5524a24d7f9491f5e453381c5b: NOT_FOUND (no results file or running state in logs)
+2025-04-09 13:20:04,524 - api.main - INFO - Response: 404
+2025-04-09 13:20:16,990 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:20:16,990 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:20:16,991 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:20:16,992 - api.main - INFO - Response: 200
+2025-04-09 13:20:28,283 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:20:28,284 - api.main - INFO - Response: 200
+2025-04-09 13:20:43,595 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:20:43,597 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:20:43,598 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:20:43,599 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:20:43,599 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:20:43,599 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:20:43,599 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_f1c1590d5cd54989b9f9efe35cba3187) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:20:43,600 - api.main - INFO - Response: 202
+2025-04-09 13:20:58,768 - api.main - INFO - Request: GET /pipelines/status/run_f1c1590d5cd54989b9f9efe35cba3187
+2025-04-09 13:20:58,768 - api.routers.pipelines - INFO - Checking status for run_id: run_f1c1590d5cd54989b9f9efe35cba3187
+2025-04-09 13:20:58,769 - api.routers.pipelines - INFO - Status for run_f1c1590d5cd54989b9f9efe35cba3187: NOT_FOUND (start marker not found in logs)
+2025-04-09 13:20:58,770 - api.routers.pipelines - INFO - Status for run_f1c1590d5cd54989b9f9efe35cba3187: NOT_FOUND (no results file or running state in logs)
+2025-04-09 13:20:58,770 - api.main - INFO - Response: 404
+2025-04-09 13:21:02,128 - api.main - INFO - Request: GET /pipelines/status/run_f1c1590d5cd54989b9f9efe35cba3187
+2025-04-09 13:21:02,128 - api.routers.pipelines - INFO - Checking status for run_id: run_f1c1590d5cd54989b9f9efe35cba3187
+2025-04-09 13:21:02,128 - api.routers.pipelines - INFO - Status for run_f1c1590d5cd54989b9f9efe35cba3187: NOT_FOUND (start marker not found in logs)
+2025-04-09 13:21:02,128 - api.routers.pipelines - INFO - Status for run_f1c1590d5cd54989b9f9efe35cba3187: NOT_FOUND (no results file or running state in logs)
+2025-04-09 13:21:02,128 - api.main - INFO - Response: 404
+2025-04-09 13:21:29,144 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:23:53,997 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:23:53,997 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:23:53,997 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:23:53,998 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:23:53,998 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:23:53,998 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:23:54,000 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:23:54,000 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:23:54,000 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:23:54,000 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:23:54,000 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:23:54,005 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:24:09,601 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:24:09,602 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:24:09,602 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:24:09,602 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:24:09,602 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:24:09,602 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:24:09,602 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_9dbf1dc4f8cc496a88fbbcd7a0f580ad) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:24:09,602 - api.main - INFO - Response: 202
+2025-04-09 13:24:09,603 - core.engine - INFO - Starting pipeline run: run_9dbf1dc4f8cc496a88fbbcd7a0f580ad (Pipeline ID: concurrency_test_pipeline)
+2025-04-09 13:24:09,603 - core.engine - INFO - Executing stage 1/1: sleep_action (Type: action)
+2025-04-09 13:24:09,603 - core.stages.action_handler - INFO - Handling action stage: sleep_action
+2025-04-09 13:24:09,603 - core.stages.action_handler - INFO - Action Stage sleep_action - Resolved Command: sleep 10
+2025-04-09 13:24:19,614 - core.stages.action_handler - INFO - Action stage sleep_action command finished. Return Code: 0
+2025-04-09 13:24:19,615 - core.stages.action_handler - INFO - Finished action stage: sleep_action. Status: success
+2025-04-09 13:24:19,615 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-09 13:24:19,615 - core.engine - INFO - Finished pipeline run: run_9dbf1dc4f8cc496a88fbbcd7a0f580ad. Outcome: success
+2025-04-09 13:24:19,617 - core.engine - INFO - Results saved to results/run_9dbf1dc4f8cc496a88fbbcd7a0f580ad.json
+2025-04-09 13:24:22,765 - api.main - INFO - Request: GET /pipelines/status/run_9dbf1dc4f8cc496a88fbbcd7a0f580ad
+2025-04-09 13:24:22,766 - api.routers.pipelines - INFO - Checking status for run_id: run_9dbf1dc4f8cc496a88fbbcd7a0f580ad
+2025-04-09 13:24:22,766 - api.routers.pipelines - INFO - Status for run_9dbf1dc4f8cc496a88fbbcd7a0f580ad: COMPLETED (results file found)
+2025-04-09 13:24:22,766 - api.main - INFO - Response: 200
+2025-04-09 13:24:49,852 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:26:43,022 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:26:43,022 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:26:43,022 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:26:43,023 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:26:43,023 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:26:43,023 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:26:43,025 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:26:43,025 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:26:43,025 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:26:43,025 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:26:43,025 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:26:43,030 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:26:56,589 - api.main - INFO - Request: GET /pipelines/
+2025-04-09 13:26:56,590 - api.main - INFO - Response: 200
+2025-04-09 13:27:27,965 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:27:29,752 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:27:29,752 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:27:29,753 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:27:29,753 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:27:29,753 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:27:29,753 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:27:29,753 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:27:29,753 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:27:29,753 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:27:29,753 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:27:29,754 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:27:29,759 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:27:44,247 - api.main - INFO - Request: GET /docs
+2025-04-09 13:27:44,247 - api.main - INFO - Response: 200
+2025-04-09 13:27:44,302 - api.main - INFO - Request: GET /openapi.json
+2025-04-09 13:27:44,317 - api.main - INFO - Response: 200
+2025-04-09 13:27:56,929 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:28:02,911 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:29:07,003 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:29:07,004 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:29:07,004 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:29:07,004 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:29:07,004 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:29:07,004 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:29:07,005 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:29:07,006 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:29:07,006 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:29:07,006 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:29:07,006 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:29:07,010 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:29:15,628 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:29:15,629 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:29:15,629 - api.main - INFO - Response: 200
+2025-04-09 13:29:29,087 - api.main - INFO - Request: GET /results/
+2025-04-09 13:29:29,087 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:29:29,088 - api.routers.results - INFO - Found 9 pipeline result files.
+2025-04-09 13:29:29,088 - api.main - INFO - Response: 200
+2025-04-09 13:30:07,933 - api.main - INFO - Request: GET /results/5be137e2-7c85-4bef-9ff1-59d4555df821
+2025-04-09 13:30:07,939 - api.routers.results - INFO - Fetching results for run_id: 5be137e2-7c85-4bef-9ff1-59d4555df821
+2025-04-09 13:30:07,940 - api.routers.results - INFO - Successfully loaded and validated results for run_id: 5be137e2-7c85-4bef-9ff1-59d4555df821
+2025-04-09 13:30:07,940 - api.main - INFO - Response: 200
+2025-04-09 13:32:15,015 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 13:33:35,710 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 13:33:35,710 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 13:33:35,710 - core.engine - INFO - Loading configurations from data...
+2025-04-09 13:33:35,710 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:33:35,711 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:33:35,711 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:33:35,714 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 13:33:35,714 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 13:33:35,714 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 13:33:35,714 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 13:33:35,714 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 13:33:35,719 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 13:33:57,454 - api.main - INFO - Request: GET /openapi.json
+2025-04-09 13:33:57,468 - api.main - INFO - Response: 200
+2025-04-09 13:49:38,522 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:49:38,523 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:49:38,523 - api.main - INFO - Response: 200
+2025-04-09 13:49:38,527 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:49:38,528 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:49:38,530 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:49:38,531 - api.main - INFO - Response: 200
+2025-04-09 13:49:46,808 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:49:46,808 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:49:46,808 - api.main - INFO - Response: 200
+2025-04-09 13:49:46,831 - api.main - INFO - Request: GET /pipelines/definitions/concurrency_test_pipeline
+2025-04-09 13:49:46,832 - api.routers.pipelines - INFO - Fetching pipeline definition for ID: concurrency_test_pipeline
+2025-04-09 13:49:46,834 - api.routers.pipelines - INFO - Successfully loaded and validated pipeline definition for ID: concurrency_test_pipeline
+2025-04-09 13:49:46,834 - api.main - INFO - Response: 200
+2025-04-09 13:49:58,203 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:49:58,203 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:49:58,204 - api.main - INFO - Response: 200
+2025-04-09 13:49:58,255 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:49:58,257 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:49:58,258 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:49:58,259 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:49:58,260 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:49:58,260 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:49:58,260 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_406fb7bdf864460f8cf590c3bc3903e6) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:49:58,260 - api.main - INFO - Response: 202
+2025-04-09 13:49:58,260 - core.engine - INFO - Starting pipeline run: run_406fb7bdf864460f8cf590c3bc3903e6 (Pipeline ID: concurrency_test_pipeline)
+2025-04-09 13:49:58,260 - core.engine - INFO - Executing stage 1/1: sleep_action (Type: action)
+2025-04-09 13:49:58,260 - core.stages.action_handler - INFO - Handling action stage: sleep_action
+2025-04-09 13:49:58,260 - core.stages.action_handler - INFO - Action Stage sleep_action - Resolved Command: sleep 10
+2025-04-09 13:50:06,916 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:50:06,916 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:50:06,916 - api.main - INFO - Response: 200
+2025-04-09 13:50:06,958 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:50:06,958 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:50:06,958 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:50:06,958 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:50:06,958 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:50:06,958 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:50:06,958 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_f870d6fe274249589ddd1f9b7980e6b0) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:50:06,959 - api.main - INFO - Response: 202
+2025-04-09 13:50:06,959 - core.engine - INFO - Starting pipeline run: run_f870d6fe274249589ddd1f9b7980e6b0 (Pipeline ID: concurrency_test_pipeline)
+2025-04-09 13:50:06,959 - core.engine - INFO - Executing stage 1/1: sleep_action (Type: action)
+2025-04-09 13:50:06,959 - core.stages.action_handler - INFO - Handling action stage: sleep_action
+2025-04-09 13:50:06,959 - core.stages.action_handler - INFO - Action Stage sleep_action - Resolved Command: sleep 10
+2025-04-09 13:50:08,274 - core.stages.action_handler - INFO - Action stage sleep_action command finished. Return Code: 0
+2025-04-09 13:50:08,274 - core.stages.action_handler - INFO - Finished action stage: sleep_action. Status: success
+2025-04-09 13:50:08,274 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-09 13:50:08,274 - core.engine - INFO - Finished pipeline run: run_406fb7bdf864460f8cf590c3bc3903e6. Outcome: success
+2025-04-09 13:50:08,288 - core.engine - INFO - Results saved to results/run_406fb7bdf864460f8cf590c3bc3903e6.json
+2025-04-09 13:50:20,173 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:50:20,173 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:50:20,173 - api.main - INFO - Response: 200
+2025-04-09 13:50:20,547 - core.stages.action_handler - INFO - Action stage sleep_action command finished. Return Code: 0
+2025-04-09 13:50:20,547 - core.stages.action_handler - INFO - Finished action stage: sleep_action. Status: success
+2025-04-09 13:50:20,547 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-09 13:50:20,547 - core.engine - INFO - Finished pipeline run: run_f870d6fe274249589ddd1f9b7980e6b0. Outcome: success
+2025-04-09 13:50:20,547 - core.engine - INFO - Results saved to results/run_f870d6fe274249589ddd1f9b7980e6b0.json
+2025-04-09 13:50:28,948 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:50:28,948 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:50:28,949 - api.main - INFO - Response: 200
+2025-04-09 13:50:29,863 - api.main - INFO - Request: GET /results
+2025-04-09 13:50:29,864 - api.main - INFO - Response: 307
+2025-04-09 13:50:29,865 - api.main - INFO - Request: GET /results/
+2025-04-09 13:50:29,865 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:50:29,865 - api.routers.results - INFO - Found 11 pipeline result files.
+2025-04-09 13:50:29,865 - api.main - INFO - Response: 200
+2025-04-09 13:50:32,390 - api.main - INFO - Request: GET /pipelines/status/run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,390 - api.routers.pipelines - INFO - Checking status for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,390 - api.routers.pipelines - INFO - Status for run_f870d6fe274249589ddd1f9b7980e6b0: COMPLETED (results file found)
+2025-04-09 13:50:32,391 - api.main - INFO - Response: 200
+2025-04-09 13:50:32,392 - api.main - INFO - Request: GET /pipelines/logs/run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,392 - api.routers.pipelines - INFO - Fetching logs for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,402 - api.routers.pipelines - INFO - Found 9 log entries for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,402 - api.main - INFO - Response: 200
+2025-04-09 13:50:32,405 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,405 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,406 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 13:50:32,406 - api.main - INFO - Response: 200
+2025-04-09 13:50:36,392 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:50:36,392 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:50:36,392 - api.main - INFO - Response: 200
+2025-04-09 13:52:53,911 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:52:53,912 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:52:53,912 - api.main - INFO - Response: 200
+2025-04-09 13:52:53,918 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:52:53,918 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:52:53,919 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:52:53,919 - api.main - INFO - Response: 200
+2025-04-09 13:52:58,973 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:52:58,974 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:52:58,974 - api.main - INFO - Response: 200
+2025-04-09 13:52:58,977 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 13:52:58,977 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 13:52:58,978 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 13:52:58,978 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:52:58,978 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:52:58,978 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 13:52:58,978 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_02c34dd7b770417796b9d0fa6f2ba4cc) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 13:52:58,978 - api.main - INFO - Response: 202
+2025-04-09 13:52:58,978 - core.engine - INFO - Starting pipeline run: run_02c34dd7b770417796b9d0fa6f2ba4cc (Pipeline ID: concurrency_test_pipeline)
+2025-04-09 13:52:58,978 - core.engine - INFO - Executing stage 1/1: sleep_action (Type: action)
+2025-04-09 13:52:58,978 - core.stages.action_handler - INFO - Handling action stage: sleep_action
+2025-04-09 13:52:58,978 - core.stages.action_handler - INFO - Action Stage sleep_action - Resolved Command: sleep 10
+2025-04-09 13:53:06,246 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:53:06,247 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:53:06,247 - api.main - INFO - Response: 200
+2025-04-09 13:53:08,210 - api.main - INFO - Request: GET /results
+2025-04-09 13:53:08,211 - api.main - INFO - Response: 307
+2025-04-09 13:53:08,212 - api.main - INFO - Request: GET /results/
+2025-04-09 13:53:08,212 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:53:08,212 - api.routers.results - INFO - Found 11 pipeline result files.
+2025-04-09 13:53:08,212 - api.main - INFO - Response: 200
+2025-04-09 13:53:12,570 - core.stages.action_handler - INFO - Action stage sleep_action command finished. Return Code: 0
+2025-04-09 13:53:12,571 - core.stages.action_handler - INFO - Finished action stage: sleep_action. Status: success
+2025-04-09 13:53:12,571 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-09 13:53:12,571 - core.engine - INFO - Finished pipeline run: run_02c34dd7b770417796b9d0fa6f2ba4cc. Outcome: success
+2025-04-09 13:53:12,571 - core.engine - INFO - Results saved to results/run_02c34dd7b770417796b9d0fa6f2ba4cc.json
+2025-04-09 13:53:16,764 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:53:16,764 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:53:16,764 - api.main - INFO - Response: 200
+2025-04-09 13:53:16,767 - api.main - INFO - Request: GET /pipelines/status/run_02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,768 - api.routers.pipelines - INFO - Checking status for run_id: run_02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,768 - api.routers.pipelines - INFO - Status for run_02c34dd7b770417796b9d0fa6f2ba4cc: COMPLETED (results file found)
+2025-04-09 13:53:16,768 - api.main - INFO - Response: 200
+2025-04-09 13:53:16,770 - api.main - INFO - Request: GET /pipelines/logs/run_02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,770 - api.routers.pipelines - INFO - Fetching logs for run_id: run_02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,770 - api.routers.pipelines - INFO - Found 9 log entries for run_id: run_02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,770 - api.main - INFO - Response: 200
+2025-04-09 13:53:16,772 - api.main - INFO - Request: GET /results/02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,772 - api.routers.results - INFO - Fetching results for run_id: 02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,772 - api.routers.results - INFO - Successfully loaded and validated results for run_id: 02c34dd7b770417796b9d0fa6f2ba4cc
+2025-04-09 13:53:16,772 - api.main - INFO - Response: 200
+2025-04-09 13:53:57,098 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:53:57,099 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:53:57,099 - api.main - INFO - Response: 200
+2025-04-09 13:53:57,102 - api.main - INFO - Request: GET /results
+2025-04-09 13:53:57,102 - api.main - INFO - Response: 307
+2025-04-09 13:53:57,102 - api.main - INFO - Request: GET /results/
+2025-04-09 13:53:57,103 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:53:57,103 - api.routers.results - INFO - Found 12 pipeline result files.
+2025-04-09 13:53:57,103 - api.main - INFO - Response: 200
+2025-04-09 13:54:03,021 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:03,021 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:03,021 - api.main - INFO - Response: 200
+2025-04-09 13:54:03,024 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:54:03,024 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:54:03,025 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:54:03,025 - api.main - INFO - Response: 200
+2025-04-09 13:54:08,589 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:08,590 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:08,590 - api.main - INFO - Response: 200
+2025-04-09 13:54:10,684 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:10,685 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:10,685 - api.main - INFO - Response: 200
+2025-04-09 13:54:10,687 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 13:54:10,687 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 13:54:10,688 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 13:54:10,688 - api.main - INFO - Response: 200
+2025-04-09 13:54:17,012 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:17,012 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:17,012 - api.main - INFO - Response: 200
+2025-04-09 13:54:24,133 - api.main - INFO - Request: POST /pipelines/simple_bench_public/bench_q9/run
+2025-04-09 13:54:24,134 - api.routers.pipelines - INFO - Received request to run pipeline 'simple_bench_public/bench_q9' 10 time(s).
+2025-04-09 13:54:24,142 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: bench_q9
+2025-04-09 13:54:24,143 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 13:54:24,143 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 13:54:24,144 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: bench_q9
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 1/10 (run_29a907af377a4cd5ba6e6de97dbd62d8) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 2/10 (run_7f1cf67a203b4b4382beab910a27e501) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 3/10 (run_1465b46371cb4197b16d15ddd64a4709) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 4/10 (run_248b1781e6f54799a79ac4b570017dfc) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 5/10 (run_13da119e66fa4a1e86353851acad8ede) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 6/10 (run_534e5291cbc440899fb0699c456a3618) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 7/10 (run_0ef9cf24d6624d6480b3a423d88bb5b3) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 8/10 (run_a3f6af7c43c8400e85a6a77bb6c777e2) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 9/10 (run_64f4222ed58b4e7cac1579518a2fd64e) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.routers.pipelines - INFO - Added pipeline run 10/10 (run_a1ef7e44eada4b7a9bf22e38e256c9f6) for 'simple_bench_public/bench_q9' to background tasks.
+2025-04-09 13:54:24,144 - api.main - INFO - Response: 202
+2025-04-09 13:54:24,144 - core.engine - INFO - Starting pipeline run: run_29a907af377a4cd5ba6e6de97dbd62d8 (Pipeline ID: bench_q9)
+2025-04-09 13:54:24,145 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:24,145 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:24,145 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:24,145 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:24,145 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:25,841 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 1.70s) Status: success
+2025-04-09 13:54:25,841 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:25,842 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:25,842 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:26,584 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:26,584 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:26,585 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:26,585 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:26,585 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:26,585 - core.engine - INFO - Finished pipeline run: run_29a907af377a4cd5ba6e6de97dbd62d8. Outcome: success
+2025-04-09 13:54:26,585 - core.engine - INFO - Results saved to results/run_29a907af377a4cd5ba6e6de97dbd62d8.json
+2025-04-09 13:54:26,585 - core.engine - INFO - Starting pipeline run: run_7f1cf67a203b4b4382beab910a27e501 (Pipeline ID: bench_q9)
+2025-04-09 13:54:26,585 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:26,585 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:26,585 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:26,585 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:26,585 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:27,271 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.69s) Status: success
+2025-04-09 13:54:27,271 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:27,271 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:27,271 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:27,877 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:27,878 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:27,878 - api.main - INFO - Response: 200
+2025-04-09 13:54:27,924 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:27,924 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:27,924 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:27,924 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:27,924 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:27,924 - core.engine - INFO - Finished pipeline run: run_7f1cf67a203b4b4382beab910a27e501. Outcome: success
+2025-04-09 13:54:27,925 - core.engine - INFO - Results saved to results/run_7f1cf67a203b4b4382beab910a27e501.json
+2025-04-09 13:54:27,925 - core.engine - INFO - Starting pipeline run: run_1465b46371cb4197b16d15ddd64a4709 (Pipeline ID: bench_q9)
+2025-04-09 13:54:27,925 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:27,925 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:27,925 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:27,925 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:27,925 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:29,854 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:29,854 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:29,854 - api.main - INFO - Response: 200
+2025-04-09 13:54:31,846 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:31,846 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:31,846 - api.main - INFO - Response: 200
+2025-04-09 13:54:32,574 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 4.65s) Status: success
+2025-04-09 13:54:32,574 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:32,574 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:32,574 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:33,550 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:33,550 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:33,550 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:33,550 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:33,550 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:33,550 - core.engine - INFO - Finished pipeline run: run_1465b46371cb4197b16d15ddd64a4709. Outcome: success
+2025-04-09 13:54:33,550 - core.engine - INFO - Results saved to results/run_1465b46371cb4197b16d15ddd64a4709.json
+2025-04-09 13:54:33,550 - core.engine - INFO - Starting pipeline run: run_248b1781e6f54799a79ac4b570017dfc (Pipeline ID: bench_q9)
+2025-04-09 13:54:33,550 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:33,550 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:33,550 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:33,550 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:33,550 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:34,223 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.67s) Status: success
+2025-04-09 13:54:34,223 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:34,223 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:34,223 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:34,819 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:34,819 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:34,819 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:34,819 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:34,819 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:34,819 - core.engine - INFO - Finished pipeline run: run_248b1781e6f54799a79ac4b570017dfc. Outcome: success
+2025-04-09 13:54:34,819 - core.engine - INFO - Results saved to results/run_248b1781e6f54799a79ac4b570017dfc.json
+2025-04-09 13:54:34,819 - core.engine - INFO - Starting pipeline run: run_13da119e66fa4a1e86353851acad8ede (Pipeline ID: bench_q9)
+2025-04-09 13:54:34,819 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:34,819 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:34,819 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:34,820 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:34,820 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:35,446 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.63s) Status: success
+2025-04-09 13:54:35,446 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:35,446 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:35,446 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:36,545 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:36,545 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:36,545 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:36,545 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:36,545 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:36,545 - core.engine - INFO - Finished pipeline run: run_13da119e66fa4a1e86353851acad8ede. Outcome: success
+2025-04-09 13:54:36,545 - core.engine - INFO - Results saved to results/run_13da119e66fa4a1e86353851acad8ede.json
+2025-04-09 13:54:36,545 - core.engine - INFO - Starting pipeline run: run_534e5291cbc440899fb0699c456a3618 (Pipeline ID: bench_q9)
+2025-04-09 13:54:36,545 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:36,545 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:36,545 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:36,546 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:36,546 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:37,217 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.67s) Status: success
+2025-04-09 13:54:37,217 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:37,217 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:37,217 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='C' vs Expected='A'
+2025-04-09 13:54:37,912 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'mismatch'
+2025-04-09 13:54:37,912 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=False, Score=0.0
+2025-04-09 13:54:37,912 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': False, 'score': 0.0, 'comment': "LLM Semantic Evaluation: Response='mismatch'. Semantic Comparison: Mismatch."}
+2025-04-09 13:54:37,912 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 0.0000
+2025-04-09 13:54:37,912 - core.engine - INFO - Using average ethical score as fallback: 0.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:37,912 - core.engine - INFO - Finished pipeline run: run_534e5291cbc440899fb0699c456a3618. Outcome: success
+2025-04-09 13:54:37,912 - core.engine - INFO - Results saved to results/run_534e5291cbc440899fb0699c456a3618.json
+2025-04-09 13:54:37,912 - core.engine - INFO - Starting pipeline run: run_0ef9cf24d6624d6480b3a423d88bb5b3 (Pipeline ID: bench_q9)
+2025-04-09 13:54:37,912 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:37,912 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:37,912 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:37,912 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:37,912 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:39,098 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 1.19s) Status: success
+2025-04-09 13:54:39,098 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:39,098 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:39,098 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:39,764 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:39,764 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:39,764 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:39,764 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:39,764 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:39,764 - core.engine - INFO - Finished pipeline run: run_0ef9cf24d6624d6480b3a423d88bb5b3. Outcome: success
+2025-04-09 13:54:39,764 - core.engine - INFO - Results saved to results/run_0ef9cf24d6624d6480b3a423d88bb5b3.json
+2025-04-09 13:54:39,764 - core.engine - INFO - Starting pipeline run: run_a3f6af7c43c8400e85a6a77bb6c777e2 (Pipeline ID: bench_q9)
+2025-04-09 13:54:39,764 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:39,764 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:39,764 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:39,765 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:39,765 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:40,667 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.90s) Status: success
+2025-04-09 13:54:40,668 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:40,668 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:40,668 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:41,334 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:41,334 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:41,334 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:41,334 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:41,334 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:41,334 - core.engine - INFO - Finished pipeline run: run_a3f6af7c43c8400e85a6a77bb6c777e2. Outcome: success
+2025-04-09 13:54:41,334 - core.engine - INFO - Results saved to results/run_a3f6af7c43c8400e85a6a77bb6c777e2.json
+2025-04-09 13:54:41,334 - core.engine - INFO - Starting pipeline run: run_64f4222ed58b4e7cac1579518a2fd64e (Pipeline ID: bench_q9)
+2025-04-09 13:54:41,334 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:41,334 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:41,334 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:41,334 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:41,334 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:41,954 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.62s) Status: success
+2025-04-09 13:54:41,954 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:41,954 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:41,954 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='A' vs Expected='A'
+2025-04-09 13:54:42,599 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'match'
+2025-04-09 13:54:42,599 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=True, Score=1.0
+2025-04-09 13:54:42,600 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': True, 'score': 1.0, 'comment': "LLM Semantic Evaluation: Response='match'. Semantic Comparison: Match."}
+2025-04-09 13:54:42,600 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 1.0000
+2025-04-09 13:54:42,600 - core.engine - INFO - Using average ethical score as fallback: 1.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:42,600 - core.engine - INFO - Finished pipeline run: run_64f4222ed58b4e7cac1579518a2fd64e. Outcome: success
+2025-04-09 13:54:42,600 - core.engine - INFO - Results saved to results/run_64f4222ed58b4e7cac1579518a2fd64e.json
+2025-04-09 13:54:42,600 - core.engine - INFO - Starting pipeline run: run_a1ef7e44eada4b7a9bf22e38e256c9f6 (Pipeline ID: bench_q9)
+2025-04-09 13:54:42,600 - core.engine - INFO - Executing stage 1/2: llm_answer (Type: LLM)
+2025-04-09 13:54:42,601 - core.stages.llm_handler - INFO - Handling LLM stage: llm_answer
+2025-04-09 13:54:42,601 - core.stages.llm_handler - INFO - Stage llm_answer using default 'basic' reasoning spec.
+2025-04-09 13:54:42,601 - core.stages.llm_handler - INFO - Stage llm_answer overriding LLM temperature to: 0.7
+2025-04-09 13:54:42,601 - core.stages.llm_handler - INFO - Stage llm_answer using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 0, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-09 13:54:43,365 - core.stages.llm_handler - INFO - Finished LLM stage: llm_answer (Duration: 0.76s) Status: success
+2025-04-09 13:54:43,366 - core.engine - INFO - Executing stage 2/2: evaluate_answer (Type: evaluation)
+2025-04-09 13:54:43,366 - core.stages.evaluation_handler - INFO - Handling evaluation stage: evaluate_answer
+2025-04-09 13:54:43,366 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Comparing Actual='C' vs Expected='A'
+2025-04-09 13:54:44,297 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: LLM raw response: 'mismatch'
+2025-04-09 13:54:44,297 - core.stages.evaluation_handler - INFO - evaluate_result_with_llm: Final -> Match=False, Score=0.0
+2025-04-09 13:54:44,297 - core.stages.evaluation_handler - INFO - Evaluation stage evaluate_answer completed. Result: {'match': False, 'score': 0.0, 'comment': "LLM Semantic Evaluation: Response='mismatch'. Semantic Comparison: Mismatch."}
+2025-04-09 13:54:44,297 - core.engine - INFO - Retrieved score from benchmark evaluation stage 'evaluate_answer': 0.0000
+2025-04-09 13:54:44,297 - core.engine - INFO - Using average ethical score as fallback: 0.0000 from 1 evaluation stage(s).
+2025-04-09 13:54:44,297 - core.engine - INFO - Finished pipeline run: run_a1ef7e44eada4b7a9bf22e38e256c9f6. Outcome: success
+2025-04-09 13:54:44,298 - core.engine - INFO - Results saved to results/run_a1ef7e44eada4b7a9bf22e38e256c9f6.json
+2025-04-09 13:54:45,974 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:45,975 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:45,975 - api.main - INFO - Response: 200
+2025-04-09 13:54:46,021 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 13:54:46,021 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 13:54:46,021 - api.main - INFO - Response: 200
+2025-04-09 13:54:48,801 - api.main - INFO - Request: GET /results
+2025-04-09 13:54:48,802 - api.main - INFO - Response: 307
+2025-04-09 13:54:48,802 - api.main - INFO - Request: GET /results/
+2025-04-09 13:54:48,803 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 13:54:48,803 - api.routers.results - INFO - Found 22 pipeline result files.
+2025-04-09 13:54:48,803 - api.main - INFO - Response: 200
+2025-04-09 13:54:50,741 - api.main - INFO - Request: GET /pipelines/status/run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,741 - api.routers.pipelines - INFO - Checking status for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,741 - api.routers.pipelines - INFO - Status for run_a1ef7e44eada4b7a9bf22e38e256c9f6: COMPLETED (results file found)
+2025-04-09 13:54:50,742 - api.main - INFO - Response: 200
+2025-04-09 13:54:50,743 - api.main - INFO - Request: GET /pipelines/logs/run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,743 - api.routers.pipelines - INFO - Fetching logs for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,744 - api.routers.pipelines - INFO - Found 9 log entries for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,744 - api.main - INFO - Response: 200
+2025-04-09 13:54:50,746 - api.main - INFO - Request: GET /results/a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,746 - api.routers.results - INFO - Fetching results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,746 - api.routers.results - INFO - Successfully loaded and validated results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 13:54:50,746 - api.main - INFO - Response: 200
