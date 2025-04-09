@@ -995,3 +995,436 @@ AttributeError: 'Pipeline' object has no attribute 'pipeline_id'
 2025-04-09 13:54:50,746 - api.routers.results - INFO - Fetching results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
 2025-04-09 13:54:50,746 - api.routers.results - INFO - Successfully loaded and validated results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
 2025-04-09 13:54:50,746 - api.main - INFO - Response: 200
+2025-04-09 14:05:39,410 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:05:39,411 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:05:39,411 - api.main - INFO - Response: 200
+2025-04-09 14:05:39,416 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:05:39,416 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:05:39,417 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:05:39,417 - api.main - INFO - Response: 200
+2025-04-09 14:05:43,076 - api.main - INFO - Request: POST /pipelines/concurrency_test_pipeline/run
+2025-04-09 14:05:43,077 - api.routers.pipelines - INFO - Received request to run pipeline 'concurrency_test_pipeline' 1 time(s).
+2025-04-09 14:05:43,085 - api.routers.pipelines - INFO - Successfully loaded pipeline definition: concurrency_test_pipeline
+2025-04-09 14:05:43,085 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 14:05:43,085 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 14:05:43,085 - api.routers.pipelines - INFO - Pipeline components validated successfully for run: concurrency_test_pipeline
+2025-04-09 14:05:43,085 - api.routers.pipelines - INFO - Added pipeline run 1/1 (run_2f39d25bd88d45f99cc84642b60b2697) for 'concurrency_test_pipeline' to background tasks.
+2025-04-09 14:05:43,085 - api.main - INFO - Response: 202
+2025-04-09 14:05:43,086 - core.engine - INFO - Starting pipeline run: run_2f39d25bd88d45f99cc84642b60b2697 (Pipeline ID: concurrency_test_pipeline)
+2025-04-09 14:05:43,086 - core.engine - INFO - Executing stage 1/1: sleep_action (Type: action)
+2025-04-09 14:05:43,086 - core.stages.action_handler - INFO - Handling action stage: sleep_action
+2025-04-09 14:05:43,086 - core.stages.action_handler - INFO - Action Stage sleep_action - Resolved Command: sleep 10
+2025-04-09 14:05:45,949 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:05:45,950 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:05:45,950 - api.main - INFO - Response: 200
+2025-04-09 14:05:45,952 - api.main - INFO - Request: GET /results
+2025-04-09 14:05:45,952 - api.main - INFO - Response: 307
+2025-04-09 14:05:45,953 - api.main - INFO - Request: GET /results/
+2025-04-09 14:05:45,953 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:05:45,953 - api.routers.results - INFO - Found 22 pipeline result files.
+2025-04-09 14:05:45,954 - api.main - INFO - Response: 200
+2025-04-09 14:05:47,545 - api.main - INFO - Request: GET /pipelines/status/run_2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,546 - api.routers.pipelines - INFO - Checking status for run_id: run_2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,546 - api.routers.pipelines - INFO - Status for run_2f39d25bd88d45f99cc84642b60b2697: RUNNING (start marker found in logs, no end/error marker)
+2025-04-09 14:05:47,546 - api.main - INFO - Response: 200
+2025-04-09 14:05:47,548 - api.main - INFO - Request: GET /pipelines/logs/run_2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,548 - api.routers.pipelines - INFO - Fetching logs for run_id: run_2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,548 - api.routers.pipelines - INFO - Found 7 log entries for run_id: run_2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,549 - api.main - INFO - Response: 200
+2025-04-09 14:05:47,551 - api.main - INFO - Request: GET /results/2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,551 - api.routers.results - INFO - Fetching results for run_id: 2f39d25bd88d45f99cc84642b60b2697
+2025-04-09 14:05:47,551 - api.routers.results - WARNING - Results file not found for run_id '2f39d25bd88d45f99cc84642b60b2697' at path /home/emoore/ethicsengine_enterprise/results/run_2f39d25bd88d45f99cc84642b60b2697.json
+2025-04-09 14:05:47,551 - api.main - INFO - Response: 404
+2025-04-09 14:05:53,091 - core.stages.action_handler - INFO - Action stage sleep_action command finished. Return Code: 0
+2025-04-09 14:05:53,092 - core.stages.action_handler - INFO - Finished action stage: sleep_action. Status: success
+2025-04-09 14:05:53,092 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-09 14:05:53,092 - core.engine - INFO - Finished pipeline run: run_2f39d25bd88d45f99cc84642b60b2697. Outcome: success
+2025-04-09 14:05:53,092 - core.engine - INFO - Results saved to results/run_2f39d25bd88d45f99cc84642b60b2697.json
+2025-04-09 14:06:07,394 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:06:07,394 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:06:07,394 - api.main - INFO - Response: 200
+2025-04-09 14:06:09,242 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:06:09,242 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:06:09,242 - api.main - INFO - Response: 200
+2025-04-09 14:06:09,244 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:06:09,244 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:06:09,245 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:06:09,245 - api.main - INFO - Response: 200
+2025-04-09 14:06:12,736 - api.main - INFO - Request: GET /results
+2025-04-09 14:06:12,736 - api.main - INFO - Response: 307
+2025-04-09 14:06:12,737 - api.main - INFO - Request: GET /results/
+2025-04-09 14:06:12,737 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:06:12,737 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 14:06:12,737 - api.main - INFO - Response: 200
+2025-04-09 14:06:14,564 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:06:14,564 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:06:14,565 - api.main - INFO - Response: 200
+2025-04-09 14:06:14,567 - api.main - INFO - Request: GET /pipelines/status/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,567 - api.routers.pipelines - INFO - Checking status for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,567 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:06:14,568 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:06:14,568 - api.main - INFO - Response: 404
+2025-04-09 14:06:14,570 - api.main - INFO - Request: GET /pipelines/logs/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,570 - api.routers.pipelines - INFO - Fetching logs for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,570 - api.routers.pipelines - INFO - Found 9 log entries for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,570 - api.main - INFO - Response: 200
+2025-04-09 14:06:14,572 - api.main - INFO - Request: GET /results/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,572 - api.routers.results - INFO - Fetching results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,573 - api.routers.results - INFO - Successfully loaded and validated results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:06:14,573 - api.main - INFO - Response: 200
+2025-04-09 14:06:16,230 - api.main - INFO - Request: GET /pipelines/status/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,230 - api.routers.pipelines - INFO - Checking status for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,231 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:06:16,231 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:06:16,231 - api.main - INFO - Response: 404
+2025-04-09 14:06:16,234 - api.main - INFO - Request: GET /pipelines/logs/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,234 - api.routers.pipelines - INFO - Fetching logs for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,234 - api.routers.pipelines - INFO - Found 19 log entries for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,234 - api.main - INFO - Response: 200
+2025-04-09 14:06:16,237 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,237 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,238 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:06:16,238 - api.main - INFO - Response: 200
+2025-04-09 14:09:15,593 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:09:15,595 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:09:15,595 - api.main - INFO - Response: 200
+2025-04-09 14:09:15,599 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:09:15,600 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:09:15,601 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:09:15,601 - api.main - INFO - Response: 200
+2025-04-09 14:09:18,509 - api.main - INFO - Request: GET /results
+2025-04-09 14:09:18,510 - api.main - INFO - Response: 307
+2025-04-09 14:09:18,510 - api.main - INFO - Request: GET /results/
+2025-04-09 14:09:18,510 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:09:18,513 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 14:09:18,513 - api.main - INFO - Response: 200
+2025-04-09 14:09:20,059 - api.main - INFO - Request: GET /pipelines/status/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,059 - api.routers.pipelines - INFO - Checking status for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,060 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:09:20,060 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:09:20,060 - api.main - INFO - Response: 404
+2025-04-09 14:09:20,062 - api.main - INFO - Request: GET /pipelines/logs/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,062 - api.routers.pipelines - INFO - Fetching logs for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,062 - api.routers.pipelines - INFO - Found 19 log entries for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,062 - api.main - INFO - Response: 200
+2025-04-09 14:09:20,064 - api.main - INFO - Request: GET /results/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,064 - api.routers.results - INFO - Fetching results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,064 - api.routers.results - INFO - Successfully loaded and validated results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:09:20,064 - api.main - INFO - Response: 200
+2025-04-09 14:09:27,122 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:09:27,123 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:09:27,123 - api.main - INFO - Response: 200
+2025-04-09 14:09:27,125 - api.main - INFO - Request: GET /pipelines/status/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,125 - api.routers.pipelines - INFO - Checking status for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,133 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:09:27,134 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:09:27,134 - api.main - INFO - Response: 404
+2025-04-09 14:09:27,135 - api.main - INFO - Request: GET /pipelines/logs/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,136 - api.routers.pipelines - INFO - Fetching logs for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,136 - api.routers.pipelines - INFO - Found 29 log entries for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,136 - api.main - INFO - Response: 200
+2025-04-09 14:09:27,138 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,139 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,139 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:09:27,139 - api.main - INFO - Response: 200
+2025-04-09 14:11:09,774 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 14:11:13,421 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 14:11:13,421 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 14:11:13,421 - core.engine - INFO - Loading configurations from data...
+2025-04-09 14:11:13,421 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 14:11:13,421 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 14:11:13,422 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 14:11:13,423 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 14:11:13,423 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 14:11:13,423 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 14:11:13,423 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 14:11:13,423 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 14:11:13,428 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 14:11:19,491 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:11:19,491 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:11:19,491 - api.main - INFO - Response: 200
+2025-04-09 14:11:19,494 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:11:19,494 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:11:19,495 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:11:19,495 - api.main - INFO - Response: 200
+2025-04-09 14:11:25,826 - api.main - INFO - Request: GET /results
+2025-04-09 14:11:25,827 - api.main - INFO - Response: 307
+2025-04-09 14:11:25,828 - api.main - INFO - Request: GET /results/
+2025-04-09 14:11:25,828 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:11:25,829 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 14:11:25,829 - api.main - INFO - Response: 200
+2025-04-09 14:11:28,568 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:11:28,568 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:11:28,568 - api.main - INFO - Response: 200
+2025-04-09 14:11:28,571 - api.main - INFO - Request: GET /pipelines/status/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,571 - api.routers.pipelines - INFO - Checking status for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,571 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:11:28,572 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:11:28,572 - api.main - INFO - Response: 404
+2025-04-09 14:11:28,574 - api.main - INFO - Request: GET /pipelines/logs/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,574 - api.routers.pipelines - INFO - Fetching logs for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,574 - api.routers.pipelines - INFO - Found 39 log entries for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,574 - api.main - INFO - Response: 200
+2025-04-09 14:11:28,587 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,587 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,588 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:11:28,588 - api.main - INFO - Response: 200
+2025-04-09 14:14:09,187 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 14:14:13,971 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 14:14:13,971 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 14:14:13,971 - core.engine - INFO - Loading configurations from data...
+2025-04-09 14:14:13,971 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 14:14:13,971 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 14:14:13,971 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 14:14:13,972 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 14:14:13,973 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 14:14:13,973 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 14:14:13,973 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 14:14:13,973 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 14:14:13,978 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 14:14:26,973 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:14:26,974 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:14:26,974 - api.main - INFO - Response: 200
+2025-04-09 14:14:26,977 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:14:26,977 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:14:26,978 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:14:26,978 - api.main - INFO - Response: 200
+2025-04-09 14:14:31,736 - api.main - INFO - Request: GET /results
+2025-04-09 14:14:31,737 - api.main - INFO - Response: 307
+2025-04-09 14:14:31,737 - api.main - INFO - Request: GET /results/
+2025-04-09 14:14:31,738 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:14:31,738 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 14:14:31,738 - api.main - INFO - Response: 200
+2025-04-09 14:14:33,595 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:14:33,595 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:14:33,595 - api.main - INFO - Response: 200
+2025-04-09 14:14:33,598 - api.main - INFO - Request: GET /pipelines/status/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,598 - api.routers.pipelines - INFO - Checking status for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,607 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:14:33,607 - api.routers.pipelines - INFO - Status for bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:14:33,607 - api.main - INFO - Response: 404
+2025-04-09 14:14:33,610 - api.main - INFO - Request: GET /pipelines/logs/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,610 - api.routers.pipelines - INFO - Fetching logs for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,610 - api.routers.pipelines - INFO - Found 29 log entries for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,610 - api.main - INFO - Response: 200
+2025-04-09 14:14:33,612 - api.main - INFO - Request: GET /results/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,612 - api.routers.results - INFO - Fetching results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,612 - api.routers.results - INFO - Successfully loaded and validated results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:14:33,613 - api.main - INFO - Response: 200
+2025-04-09 14:14:38,684 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:14:38,686 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:14:38,687 - api.main - INFO - Response: 200
+2025-04-09 14:14:38,689 - api.main - INFO - Request: GET /pipelines/status/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,689 - api.routers.pipelines - INFO - Checking status for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,689 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:14:38,689 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:14:38,689 - api.main - INFO - Response: 404
+2025-04-09 14:14:38,691 - api.main - INFO - Request: GET /pipelines/logs/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,691 - api.routers.pipelines - INFO - Fetching logs for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,691 - api.routers.pipelines - INFO - Found 49 log entries for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,691 - api.main - INFO - Response: 200
+2025-04-09 14:14:38,695 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,695 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,696 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:14:38,696 - api.main - INFO - Response: 200
+2025-04-09 14:14:53,695 - api.main - INFO - Request: GET /
+2025-04-09 14:14:53,696 - api.main - INFO - Response: 200
+2025-04-09 14:15:02,741 - api.main - INFO - Request: GET /docs
+2025-04-09 14:15:02,742 - api.main - INFO - Response: 200
+2025-04-09 14:15:02,827 - api.main - INFO - Request: GET /openapi.json
+2025-04-09 14:15:02,843 - api.main - INFO - Response: 200
+2025-04-09 14:15:38,113 - api.main - INFO - Request: GET /pipelines/status/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:15:38,114 - api.routers.pipelines - INFO - Checking status for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:15:38,122 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (start marker not found in logs)
+2025-04-09 14:15:38,122 - api.routers.pipelines - INFO - Status for f870d6fe274249589ddd1f9b7980e6b0: NOT_FOUND (no results file or running state in logs)
+2025-04-09 14:15:38,122 - api.main - INFO - Response: 404
+2025-04-09 14:15:48,396 - api.main - INFO - Request: GET /pipelines/status/run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:15:48,396 - api.routers.pipelines - INFO - Checking status for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:15:48,397 - api.routers.pipelines - INFO - Status for run_f870d6fe274249589ddd1f9b7980e6b0: COMPLETED (outcome='success' in results file)
+2025-04-09 14:15:48,397 - api.main - INFO - Response: 200
+2025-04-09 14:16:23,481 - api.main - INFO - Shutting down Ethics Engine Enterprise API...
+2025-04-09 14:17:51,430 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-09 14:17:51,431 - core.engine - INFO - EthicsEngine initializing...
+2025-04-09 14:17:51,431 - core.engine - INFO - Loading configurations from data...
+2025-04-09 14:17:51,431 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-09 14:17:51,431 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-09 14:17:51,431 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-09 14:17:51,432 - config.loader - INFO - Loaded 6 Pipeline configurations from data/pipelines.
+2025-04-09 14:17:51,432 - core.engine - INFO - Configurations loaded: 5 identities, 7 guidances, 6 guardrails, 6 pipelines.
+2025-04-09 14:17:51,432 - core.engine - INFO - EthicsEngine initialized.
+2025-04-09 14:17:51,432 - api.main - INFO - Concurrency monitor initialized with limit: 10
+2025-04-09 14:17:51,432 - api.main - INFO - EthicsEngine instance created and configurations loaded.
+2025-04-09 14:17:51,437 - api.main - INFO - Starting Ethics Engine Enterprise API...
+2025-04-09 14:17:59,878 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:17:59,879 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:17:59,879 - api.main - INFO - Response: 200
+2025-04-09 14:17:59,882 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:17:59,882 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:17:59,883 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:17:59,883 - api.main - INFO - Response: 200
+2025-04-09 14:18:02,062 - api.main - INFO - Request: GET /results
+2025-04-09 14:18:02,062 - api.main - INFO - Response: 307
+2025-04-09 14:18:02,063 - api.main - INFO - Request: GET /results/
+2025-04-09 14:18:02,063 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 14:18:02,063 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 14:18:02,063 - api.main - INFO - Response: 200
+2025-04-09 14:18:03,809 - api.main - INFO - Request: GET /pipelines/status/run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,810 - api.routers.pipelines - INFO - Checking status for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,818 - api.routers.pipelines - INFO - Status for run_f870d6fe274249589ddd1f9b7980e6b0: COMPLETED (outcome='success' in results file)
+2025-04-09 14:18:03,819 - api.main - INFO - Response: 200
+2025-04-09 14:18:03,822 - api.main - INFO - Request: GET /pipelines/logs/run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,822 - api.routers.pipelines - INFO - Fetching logs for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,823 - api.routers.pipelines - INFO - Found 18 log entries for run_id: run_f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,823 - api.main - INFO - Response: 200
+2025-04-09 14:18:03,827 - api.main - INFO - Request: GET /results/f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,827 - api.routers.results - INFO - Fetching results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,827 - api.routers.results - INFO - Successfully loaded and validated results for run_id: f870d6fe274249589ddd1f9b7980e6b0
+2025-04-09 14:18:03,827 - api.main - INFO - Response: 200
+2025-04-09 14:18:05,656 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:18:05,657 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:18:05,657 - api.main - INFO - Response: 200
+2025-04-09 14:18:05,663 - api.main - INFO - Request: GET /pipelines/status/run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,663 - api.routers.pipelines - INFO - Checking status for run_id: run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,664 - api.routers.pipelines - INFO - Status for run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062: ERROR (outcome='error' in results file)
+2025-04-09 14:18:05,664 - api.main - INFO - Response: 200
+2025-04-09 14:18:05,666 - api.main - INFO - Request: GET /pipelines/logs/run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,669 - api.routers.pipelines - INFO - Fetching logs for run_id: run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,669 - api.routers.pipelines - INFO - Found 8 log entries for run_id: run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,669 - api.main - INFO - Response: 200
+2025-04-09 14:18:05,673 - api.main - INFO - Request: GET /results/bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,673 - api.routers.results - INFO - Fetching results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,675 - api.routers.results - INFO - Successfully loaded and validated results for run_id: bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062
+2025-04-09 14:18:05,675 - api.main - INFO - Response: 200
+2025-04-09 14:18:07,757 - api.main - INFO - Request: GET /pipelines/status/run_a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,757 - api.routers.pipelines - INFO - Checking status for run_id: run_a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,758 - api.routers.pipelines - INFO - Status for run_a3f6af7c43c8400e85a6a77bb6c777e2: COMPLETED (outcome='success' in results file)
+2025-04-09 14:18:07,759 - api.main - INFO - Response: 200
+2025-04-09 14:18:07,760 - api.main - INFO - Request: GET /pipelines/logs/run_a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,761 - api.routers.pipelines - INFO - Fetching logs for run_id: run_a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,761 - api.routers.pipelines - INFO - Found 9 log entries for run_id: run_a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,761 - api.main - INFO - Response: 200
+2025-04-09 14:18:07,763 - api.main - INFO - Request: GET /results/a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,763 - api.routers.results - INFO - Fetching results for run_id: a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,763 - api.routers.results - INFO - Successfully loaded and validated results for run_id: a3f6af7c43c8400e85a6a77bb6c777e2
+2025-04-09 14:18:07,763 - api.main - INFO - Response: 200
+2025-04-09 14:18:09,438 - api.main - INFO - Request: GET /pipelines/status/run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,438 - api.routers.pipelines - INFO - Checking status for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,445 - api.routers.pipelines - INFO - Status for run_a1ef7e44eada4b7a9bf22e38e256c9f6: COMPLETED (outcome='success' in results file)
+2025-04-09 14:18:09,446 - api.main - INFO - Response: 200
+2025-04-09 14:18:09,448 - api.main - INFO - Request: GET /pipelines/logs/run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,448 - api.routers.pipelines - INFO - Fetching logs for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,448 - api.routers.pipelines - INFO - Found 15 log entries for run_id: run_a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,448 - api.main - INFO - Response: 200
+2025-04-09 14:18:09,450 - api.main - INFO - Request: GET /results/a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,450 - api.routers.results - INFO - Fetching results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,450 - api.routers.results - INFO - Successfully loaded and validated results for run_id: a1ef7e44eada4b7a9bf22e38e256c9f6
+2025-04-09 14:18:09,451 - api.main - INFO - Response: 200
+2025-04-09 14:18:11,117 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:18:11,118 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:18:11,118 - api.main - INFO - Response: 200
+2025-04-09 14:18:11,120 - api.main - INFO - Request: GET /pipelines/status/run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,121 - api.routers.pipelines - INFO - Checking status for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,128 - api.routers.pipelines - INFO - Status for run_9b832821-0107-4a44-aa22-0e25d6778bc1: COMPLETED (outcome='success' in results file)
+2025-04-09 14:18:11,128 - api.main - INFO - Response: 200
+2025-04-09 14:18:11,130 - api.main - INFO - Request: GET /pipelines/logs/run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,130 - api.routers.pipelines - INFO - Fetching logs for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,131 - api.routers.pipelines - INFO - Found 8 log entries for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,131 - api.main - INFO - Response: 200
+2025-04-09 14:18:11,132 - api.main - INFO - Request: GET /results/9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,133 - api.routers.results - INFO - Fetching results for run_id: 9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,133 - api.routers.results - INFO - Successfully loaded and validated results for run_id: 9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 14:18:11,133 - api.main - INFO - Response: 200
+2025-04-09 14:18:46,719 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:18:46,720 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:18:46,720 - api.main - INFO - Response: 200
+2025-04-09 14:18:52,147 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:18:52,148 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:18:52,148 - api.main - INFO - Response: 200
+2025-04-09 14:18:55,768 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 14:18:55,769 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 14:18:55,769 - api.main - INFO - Response: 200
+2025-04-09 14:18:55,771 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 14:18:55,771 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 14:18:55,772 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 14:18:55,772 - api.main - INFO - Response: 200
+2025-04-09 15:27:45,354 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:27:45,355 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:27:45,355 - api.main - INFO - Response: 200
+2025-04-09 15:27:45,358 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 15:27:45,358 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 15:27:45,359 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 15:27:45,359 - api.main - INFO - Response: 200
+2025-04-09 15:27:49,667 - api.main - INFO - Request: GET /pipelines/definitions/concurrency_test_pipeline
+2025-04-09 15:27:49,668 - api.routers.pipelines - INFO - Fetching pipeline definition for ID: concurrency_test_pipeline
+2025-04-09 15:27:49,675 - api.routers.pipelines - INFO - Successfully loaded and validated pipeline definition for ID: concurrency_test_pipeline
+2025-04-09 15:27:49,675 - api.main - INFO - Response: 200
+2025-04-09 15:27:53,569 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:27:53,569 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:27:53,569 - api.main - INFO - Response: 200
+2025-04-09 15:27:58,225 - api.main - INFO - Request: POST /pipelines/validate
+2025-04-09 15:27:58,230 - api.main - INFO - Response: 422
+2025-04-09 15:28:05,461 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:28:05,461 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:28:05,461 - api.main - INFO - Response: 200
+2025-04-09 15:28:10,123 - api.main - INFO - Request: GET /results
+2025-04-09 15:28:10,124 - api.main - INFO - Response: 307
+2025-04-09 15:28:10,124 - api.main - INFO - Request: GET /results/
+2025-04-09 15:28:10,125 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 15:28:10,125 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 15:28:10,125 - api.main - INFO - Response: 200
+2025-04-09 15:28:12,053 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:28:12,053 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:28:12,053 - api.main - INFO - Response: 200
+2025-04-09 15:28:12,056 - api.main - INFO - Request: GET /pipelines/status/run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,056 - api.routers.pipelines - INFO - Checking status for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,063 - api.routers.pipelines - INFO - Status for run_9b832821-0107-4a44-aa22-0e25d6778bc1: COMPLETED (outcome='success' in results file)
+2025-04-09 15:28:12,063 - api.main - INFO - Response: 200
+2025-04-09 15:28:12,066 - api.main - INFO - Request: GET /pipelines/logs/run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,066 - api.routers.pipelines - INFO - Fetching logs for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,067 - api.routers.pipelines - INFO - Found 14 log entries for run_id: run_9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,067 - api.main - INFO - Response: 200
+2025-04-09 15:28:12,068 - api.main - INFO - Request: GET /results/9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,069 - api.routers.results - INFO - Fetching results for run_id: 9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,069 - api.routers.results - INFO - Successfully loaded and validated results for run_id: 9b832821-0107-4a44-aa22-0e25d6778bc1
+2025-04-09 15:28:12,069 - api.main - INFO - Response: 200
+2025-04-09 15:28:25,604 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:28:25,604 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:28:25,604 - api.main - INFO - Response: 200
+2025-04-09 15:28:25,606 - api.main - INFO - Request: GET /results
+2025-04-09 15:28:25,606 - api.main - INFO - Response: 307
+2025-04-09 15:28:25,607 - api.main - INFO - Request: GET /results/
+2025-04-09 15:28:25,607 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 15:28:25,607 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 15:28:25,607 - api.main - INFO - Response: 200
+2025-04-09 15:28:25,609 - api.main - INFO - Request: GET /pipelines/status/run_0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,609 - api.routers.pipelines - INFO - Checking status for run_id: run_0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,618 - api.routers.pipelines - INFO - Status for run_0ef9cf24d6624d6480b3a423d88bb5b3: COMPLETED (outcome='success' in results file)
+2025-04-09 15:28:25,618 - api.main - INFO - Response: 200
+2025-04-09 15:28:25,620 - api.main - INFO - Request: GET /pipelines/logs/run_0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,620 - api.routers.pipelines - INFO - Fetching logs for run_id: run_0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,620 - api.routers.pipelines - INFO - Found 9 log entries for run_id: run_0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,620 - api.main - INFO - Response: 200
+2025-04-09 15:28:25,622 - api.main - INFO - Request: GET /results/0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,622 - api.routers.results - INFO - Fetching results for run_id: 0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,622 - api.routers.results - INFO - Successfully loaded and validated results for run_id: 0ef9cf24d6624d6480b3a423d88bb5b3
+2025-04-09 15:28:25,622 - api.main - INFO - Response: 200
+2025-04-09 15:31:53,219 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:31:53,220 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:31:53,220 - api.main - INFO - Response: 200
+2025-04-09 15:31:53,222 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 15:31:53,222 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 15:31:53,223 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 15:31:53,223 - api.main - INFO - Response: 200
+2025-04-09 15:33:56,494 - api.main - INFO - Request: GET /server/concurrency
+2025-04-09 15:33:56,494 - api.routers.server - INFO - Reporting concurrency status: {'limit': 10, 'active': 0, 'waiting': 0}
+2025-04-09 15:33:56,495 - api.main - INFO - Response: 200
+2025-04-09 15:33:56,497 - api.main - INFO - Request: GET /results
+2025-04-09 15:33:56,498 - api.main - INFO - Response: 307
+2025-04-09 15:33:56,498 - api.main - INFO - Request: GET /results/
+2025-04-09 15:33:56,498 - api.routers.results - INFO - Listing available pipeline results.
+2025-04-09 15:33:56,498 - api.routers.results - INFO - Found 23 pipeline result files.
+2025-04-09 15:33:56,499 - api.main - INFO - Response: 200
+2025-04-09 15:33:58,390 - api.main - INFO - Request: GET /pipelines/definitions
+2025-04-09 15:33:58,390 - api.routers.pipelines - INFO - Listing available pipeline definitions.
+2025-04-09 15:33:58,391 - api.routers.pipelines - INFO - Found 24 pipeline definitions.
+2025-04-09 15:33:58,391 - api.main - INFO - Response: 200

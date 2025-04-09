@@ -70,8 +70,9 @@ def get_results_list():
     try:
         response = requests.get(url, timeout=10)
         if handle_api_error(response, "Fetching results list"):
-            # Extract run_id part (remove 'run_') for consistency if needed, but API returns without prefix
-            return response.json().get("results", [])
+            # API returns IDs *without* prefix, prepend 'run_' for consistency in UI
+            ids_without_prefix = response.json().get("results", [])
+            return [f"run_{id_}" for id_ in ids_without_prefix]
     except Exception as e:
         st.error(f"Error fetching results list: {e}")
     return []
@@ -178,8 +179,8 @@ def display_dashboard():
     with col1:
         st.write("List of available pipeline definitions.")
     with col2:
-        if st.button("Refresh List"):
-            st.cache_data.clear() # Clear cache for definitions
+        if st.button("Refresh List & Cache"):
+            st.cache_data.clear() # Clear ALL streamlit cache data
             st.rerun()
 
     definitions = get_definitions()

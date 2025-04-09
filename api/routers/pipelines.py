@@ -295,7 +295,9 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
     """
     Retrieves the current status of a specific pipeline run.
     Checks results file first, then log file.
+    Note: The run_id path parameter *includes* the 'run_' prefix.
     """
+    # Use the run_id directly from the path as it includes the prefix
     logger.info(f"Checking status for run_id: {run_id}")
     results_dir = project_root / settings.results_dir
 
@@ -314,7 +316,7 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
     log_file_path = Path(log_file_path_str)
     # --- End dynamic log path finding ---
 
-    # The run_id generated in /submit already includes 'run_' prefix
+    # Construct filename using the run_id directly
     results_file = results_dir / f"{run_id}.json"
 
     # 1. Check for results file (indicates completion or error)
@@ -322,18 +324,24 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
         try:
             with open(results_file, 'r') as f:
                 results_data = json.load(f)
-            # Check if the results indicate an error (structure depends on core.engine output)
-            # This is a placeholder check; adjust based on actual results structure
-            if results_data.get("status") == "error" or "error" in results_data:
-                 logger.info(f"Status for {run_id}: ERROR (found error in results file)")
+            # Check the 'outcome' field from the Results schema
+            outcome = results_data.get("outcome")
+            if outcome == "error":
+                 logger.info(f"Status for {run_id}: ERROR (outcome='error' in results file)")
                  return {"run_id": run_id, "status": PipelineStatus.ERROR}
-            else:
-                logger.info(f"Status for {run_id}: COMPLETED (results file found)")
+            # Treat success, failure, or guardrail violation as COMPLETED for status purposes
+            elif outcome in ["success", "failure", "guardrail_violation"]:
+                logger.info(f"Status for {run_id}: COMPLETED (outcome='{outcome}' in results file)")
                 return {"run_id": run_id, "status": PipelineStatus.COMPLETED}
+            else: # Handle unexpected or missing outcome field (e.g., "pending" shouldn't be in a saved file)
+                 logger.warning(f"Unexpected or missing 'outcome' field ('{outcome}') in results file for {run_id}. Treating as ERROR.")
+                 return {"run_id": run_id, "status": PipelineStatus.ERROR}
+        except json.JSONDecodeError as e:
+             logger.error(f"Error decoding results file {results_file} for {run_id}: {e}", exc_info=True)
+             return {"run_id": run_id, "status": PipelineStatus.ERROR} # Treat JSON error as run error
         except Exception as e:
             logger.error(f"Error reading results file {results_file} for {run_id}: {e}", exc_info=True)
-            # Treat unreadable results file as an error state for the run
-            return {"run_id": run_id, "status": PipelineStatus.ERROR}
+            return {"run_id": run_id, "status": PipelineStatus.ERROR} # Treat other read errors as run error
 
     # 2. Check log file for signs of running
     if log_file_path.exists():
@@ -345,6 +353,7 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
                 # Assumes core.engine logs messages like:
                 # "Starting pipeline run: run_..."
                 # "Finished pipeline run: run_..." or "Error in pipeline run: run_..."
+                # Use run_id directly for checking markers
                 start_marker = f"Starting pipeline run: {run_id}"
                 finish_marker = f"Finished pipeline run: {run_id}"
                 error_marker = f"Error in pipeline run: {run_id}" # Or similar
@@ -376,7 +385,9 @@ async def get_pipeline_run_logs(run_id: str = FastApiPath(..., title="The ID of 
     """
     Retrieves detailed log entries associated with a specific pipeline run
     by filtering the main log file.
+    Note: The run_id path parameter *includes* the 'run_' prefix.
     """
+    # Use the run_id directly from the path as it includes the prefix
     logger.info(f"Fetching logs for run_id: {run_id}")
 
     # --- Dynamically find the log file path ---
@@ -403,7 +414,7 @@ async def get_pipeline_run_logs(run_id: str = FastApiPath(..., title="The ID of 
     try:
         with open(log_file_path, 'r') as f:
             for line in f:
-                # Simple substring check; might need refinement based on log format
+                # Use run_id directly for checking log lines
                 if run_id in line:
                     relevant_logs.append(line.strip())
     except Exception as e:
