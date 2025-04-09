@@ -1,0 +1,10 @@
+# Log files
+logs/
+*.log
+
+# Results files
+results/
+
+# Python compiled files
+*.pyc
+__pycache__/

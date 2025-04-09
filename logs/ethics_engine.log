@@ -290,3 +290,55 @@ ValueError: Invalid reasoning method specified: 'MCTS'. Should be one of 'beam_s
 2025-04-06 22:27:36,454 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Signaling monitoring thread to stop...
 2025-04-06 22:27:36,588 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread finished.
 2025-04-06 22:27:36,589 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread stopped cleanly.
+2025-04-07 12:13:21,879 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-07 12:13:23,083 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Starting monitoring thread (Interval: 2s)
+2025-04-07 12:13:23,083 - __main__ - INFO - Attempting to run pipeline: /home/emoore/ethicsengine_enterprise/data/pipelines/ethics/commonsense/ethics_commonsense_AITA._Am_I_wrong_for_not_wanting_my_dad_to_pay_for_2453_fff8dd8f.json
+2025-04-07 12:13:23,084 - __main__ - ERROR - Pipeline file not found: /home/emoore/ethicsengine_enterprise/data/pipelines/ethics/commonsense/ethics_commonsense_AITA._Am_I_wrong_for_not_wanting_my_dad_to_pay_for_2453_fff8dd8f.json
+2025-04-07 12:14:17,182 - root - INFO - Logging configured. Level: INFO. Log file: logs/ethics_engine.log
+2025-04-07 12:14:17,931 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Starting monitoring thread (Interval: 2s)
+2025-04-07 12:14:17,931 - __main__ - INFO - Attempting to run pipeline: /home/emoore/ethicsengine_enterprise/data/pipelines/robust_scenario_pipeline.json
+2025-04-07 12:14:17,939 - __main__ - INFO - Successfully loaded and parsed pipeline: robust_scenario_pipeline_v2
+2025-04-07 12:14:17,939 - core.engine - INFO - EthicsEngine initializing...
+2025-04-07 12:14:17,939 - core.engine - INFO - Loading configurations from data...
+2025-04-07 12:14:17,939 - config.loader - INFO - Loaded 5 Identity configurations from data/identities.
+2025-04-07 12:14:17,940 - config.loader - INFO - Loaded 7 EthicalGuidance configurations from data/guidances.
+2025-04-07 12:14:17,940 - config.loader - INFO - Loaded 6 Guardrail configurations from data/guardrails.
+2025-04-07 12:14:17,940 - core.engine - INFO - Configurations loaded (excluding pipelines): 5 identities, 7 guidances, 6 guardrails.
+2025-04-07 12:14:17,940 - core.engine - INFO - EthicsEngine initialized.
+2025-04-07 12:14:17,940 - __main__ - INFO - --- Running Pipeline: robust_scenario_pipeline_v2 ---
+2025-04-07 12:14:17,940 - core.engine - INFO - Starting pipeline run: run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062 (Pipeline ID: robust_scenario_pipeline_v2)
+2025-04-07 12:14:17,940 - core.engine - INFO - Executing stage 1/7: initial_reasoning (Type: LLM)
+2025-04-07 12:14:17,940 - core.stages.llm_handler - INFO - Handling LLM stage: initial_reasoning
+2025-04-07 12:14:17,940 - core.stages.llm_handler - INFO - Stage initial_reasoning using custom AG2 reasoning config: {'max_depth': 1, 'method': 'beam_search'}
+2025-04-07 12:14:17,940 - core.stages.llm_handler - INFO - Stage initial_reasoning using ReasoningAgent with effective config: {'method': 'beam_search', 'max_depth': 1, 'beam_size': 3, 'answer_approach': 'pool'}
+2025-04-07 12:14:38,583 - core.stages.llm_handler - INFO - Stage initial_reasoning: Captured stdio during agent run: [LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+[LLM_Semaphore Monitor] Status: Limit=10, Available=9, Active(Tracked)=1, Waiting=0
+
+2025-04-07 12:14:38,584 - core.stages.llm_handler - INFO - Finished LLM stage: initial_reasoning (Duration: 17.35s) Status: success
+2025-04-07 12:14:38,584 - core.engine - INFO - Executing stage 2/7: interaction_discussion (Type: interaction)
+2025-04-07 12:14:38,584 - core.stages.interaction_handler - INFO - Handling interaction stage: interaction_discussion
+2025-04-07 12:14:38,584 - core.stages.interaction_handler - INFO - Stage interaction_discussion: Detected multi-participant interaction (2 participants). Using GroupChat.
+2025-04-07 12:14:38,625 - core.stages.interaction_handler - INFO - Stage interaction_discussion: Created 2 agents for GroupChat: ['assistant', 'user']
+2025-04-07 12:14:42,966 - core.stages.interaction_handler - INFO - Stage interaction_discussion: GroupChat finished. History length: 3
+2025-04-07 12:14:42,966 - core.stages.interaction_handler - INFO - Stage interaction_discussion: Using last agent message as final output: 'If you're not sure of certain figures, we can discuss general examples or ranges. Just let me know! ...'
+2025-04-07 12:14:42,966 - core.stages.interaction_handler - INFO - Finished interaction stage (GroupChat): interaction_discussion. Generated 3 interactions. Duration: 4.38s Status: success
+2025-04-07 12:14:42,966 - core.engine - INFO - Executing stage 3/7: calculate_tax_impact (Type: tool)
+2025-04-07 12:14:42,966 - core.stages.tool_handler - INFO - Handling tool stage directly: calculate_tax_impact
+2025-04-07 12:14:42,966 - core.stages.tool_handler - WARNING - Tool stage calculate_tax_impact has no inputs defined.
+2025-04-07 12:14:42,966 - core.stages.tool_handler - ERROR - Tool stage calculate_tax_impact: Missing required inputs for simple_calculator: grain_surplus, percent_allocated
+2025-04-07 12:14:42,966 - core.stages.tool_handler - ERROR - Tool stage calculate_tax_impact: Tool execution returned an error: Missing required inputs for simple_calculator: grain_surplus, percent_allocated
+2025-04-07 12:14:42,966 - core.stages.tool_handler - INFO - Finished tool stage: calculate_tax_impact (Duration: 0.00s) Status: error: tool execution failed: Missing required inputs for simple_calculator: grain_surplus, percent_allocated
+2025-04-07 12:14:42,966 - core.engine - WARNING - Stage 'calculate_tax_impact' returned status: error: tool execution failed: Missing required inputs for simple_calculator: grain_surplus, percent_allocated. Stopping pipeline.
+2025-04-07 12:14:42,967 - core.engine - INFO - No ethical score could be determined from evaluation stages.
+2025-04-07 12:14:42,967 - core.engine - INFO - Finished pipeline run: run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062. Outcome: error
+2025-04-07 12:14:42,967 - core.engine - INFO - Results saved to results/run_bb29cdde-fc94-4f7a-93f9-cc6b2bf4f062.json
+2025-04-07 12:14:42,967 - __main__ - INFO - --- Pipeline Run Complete: robust_scenario_pipeline_v2 ---
+2025-04-07 12:14:42,967 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Signaling monitoring thread to stop...
+2025-04-07 12:14:43,228 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread finished.
+2025-04-07 12:14:43,228 - utils.concurrency_monitor - INFO - [LLM_Semaphore Monitor] Monitoring thread stopped cleanly.
