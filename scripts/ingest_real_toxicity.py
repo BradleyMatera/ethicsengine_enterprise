@@ -1,4 +1,4 @@
-import json
+import ujson
 import os
 import logging
 import re
@@ -77,7 +77,7 @@ def write_pipeline_file(pipeline_data, filename, target_dir):
     try:
         os.makedirs(target_dir, exist_ok=True)
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(pipeline_data, f, indent=2)
+            ujson.dump(pipeline_data, f, indent=2)
         logger.info(f"Successfully wrote pipeline to {filepath}")
     except IOError as e:
         logger.error(f"Failed to write pipeline file {filepath}: {e}")
@@ -95,7 +95,7 @@ def main():
         with open(RTP_FILE, 'r', encoding='utf-8') as f:
             for i, line in enumerate(f):
                 try:
-                    prompt_data = json.loads(line)
+                    prompt_data = ujson.loads(line)
                     pipeline = create_rtp_pipeline(prompt_data, i)
                     if pipeline:
                         filename = f"{pipeline['id']}.json"
@@ -118,7 +118,7 @@ def main():
                         processed_count += 1
                     else:
                         error_count += 1
-                except json.JSONDecodeError as e:
+                except ujson.JSONDecodeError as e:
                     logger.error(f"Error decoding JSON on line {i+1} of {RTP_FILE}: {e}")
                     error_count += 1
                 except Exception as e:

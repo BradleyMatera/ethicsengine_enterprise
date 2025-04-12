@@ -1,41 +1,94 @@
 import streamlit as st
 import requests
-import json
+import ujson
+import os
 from datetime import datetime
 import pandas as pd # For better table display
-
+from open_llm.config_llm import LLMSetter
 # --- Configuration ---
-API_BASE_URL = "http://localhost:8000" # Assuming the FastAPI server runs locally on port 8000
+DEFAULT_API_BASE_URL = "http://127.0.0.1:8080" # Assuming the FastAPI server runs locally on port 8000
 
 # --- Helper Functions for API Calls ---
 
+# Initialize session state for API URL
+if 'api_base_url' not in st.session_state:
+    st.session_state.api_base_url = DEFAULT_API_BASE_URL
+
+# Use this function to get the current API URL
+def get_api_base_url():
+    """Get the current API base URL from session state."""
+    return st.session_state.api_base_url
+
+def check_api_connection(base_url=None):
+    """
+    Check if the API server is running and responsive.
+    
+    Args:
+        base_url: The base URL of the API server
+        
+    Returns:
+        A tuple (is_connected, message)
+    """
+    if base_url is None:
+        base_url = get_api_base_url()
+        
+    try:
+        # Try a basic health endpoint first
+        health_url = f"{base_url}/health"
+        health_response = requests.get(health_url, timeout=5)
+        
+        if health_response.status_code == 200:
+            return True, f"API server is running at {base_url}"
+        
+        # If health endpoint fails, try the root endpoint
+        root_response = requests.get(base_url, timeout=5)
+        if root_response.status_code == 200:
+            return True, f"API server root endpoint is responding at {base_url}"
+            
+        return False, f"API server responded with status code {health_response.status_code}"
+        
+    except requests.exceptions.ConnectionError:
+        return False, f"Could not connect to API server at {base_url}. The server might not be running."
+    except requests.exceptions.Timeout:
+        return False, f"Connection to API server at {base_url} timed out."
+    except Exception as e:
+        return False, f"Error checking API connection: {str(e)}"
+
+    
 def handle_api_error(response, context="API call"):
     """Handles common API errors and displays messages."""
     try:
-        response.raise_for_status() # Raises HTTPError for bad responses (4xx or 5xx)
-        return True # Indicate success
+        response.raise_for_status()  # Raises HTTPError for bad responses (4xx or 5xx)
+        return True  # Indicate success
     except requests.exceptions.HTTPError as http_err:
         try:
             detail = response.json().get("detail", str(http_err))
-        except json.JSONDecodeError:
+        except ujson.JSONDecodeError:
             detail = str(http_err)
         st.error(f"{context} failed ({response.status_code}): {detail}")
     except requests.exceptions.ConnectionError as conn_err:
         st.error(f"{context} failed: Could not connect to API at {API_BASE_URL}. Is the backend running?")
     except requests.exceptions.RequestException as req_err:
         st.error(f"{context} failed: {req_err}")
-    return False # Indicate failure
+    return False  # Indicate failure
 
-@st.cache_data(ttl=60) # Cache for 1 minute
-def get_definitions():
-    """Fetches the list of pipeline definition IDs."""
-    url = f"{API_BASE_URL}/pipelines/definitions"
-    try:
-        response = requests.get(url, timeout=10)
-        if handle_api_error(response, "Fetching pipeline definitions"):
-            return response.json().get("pipelines", [])
-    except Exception as e:
-        st.error(f"Error fetching definitions: {e}")
+@st.cache_data(ttl=60)  # Cache for 1 minute
+def get_definitions(max_retries=1):
+    """Fetches the list of pipeline definition IDs with retry support."""
+    url = f"{get_api_base_url()}/pipelines/definitions"
+    
+    for attempt in range(max_retries + 1):
+        try:
+            response = requests.get(url, timeout=10)
+            if handle_api_error(response, "Fetching pipeline definitions"):
+                return response.json().get("pipelines", [])
+            elif attempt < max_retries:
+                st.warning(f"Retry {attempt+1}/{max_retries} for fetching definitions...")
+        except Exception as e:
+            st.error(f"Error fetching definitions: {e}")
+            if attempt < max_retries:
+                st.warning(f"Retry {attempt+1}/{max_retries} for fetching definitions...")
+    
     return []
 
 @st.cache_data(ttl=60)
@@ -43,7 +96,7 @@ def get_definition_details(pipeline_id: str):
     """Fetches the details of a specific pipeline definition."""
     # Need to handle potential '/' in pipeline_id for the URL
     # Requests library handles URL encoding automatically if needed, but FastAPI path converter expects raw path
-    url = f"{API_BASE_URL}/pipelines/definitions/{pipeline_id}"
+    url = f"{get_api_base_url()}/pipelines/definitions/{pipeline_id}"
     try:
         response = requests.get(url, timeout=10)
         if handle_api_error(response, f"Fetching details for '{pipeline_id}'"):
@@ -54,7 +107,7 @@ def get_definition_details(pipeline_id: str):
 
 def run_pipeline_api(pipeline_name: str, num_runs: int):
     """Calls the API to run a pipeline."""
-    url = f"{API_BASE_URL}/pipelines/{pipeline_name}/run?num_runs={num_runs}"
+    url = f"{get_api_base_url()}/pipelines/{pipeline_name}/run?num_runs={num_runs}"
     try:
         response = requests.post(url, timeout=15) # Longer timeout for triggering runs
         if handle_api_error(response, f"Running pipeline '{pipeline_name}'"):
@@ -66,7 +119,7 @@ def run_pipeline_api(pipeline_name: str, num_runs: int):
 @st.cache_data(ttl=10) # Short cache for potentially changing results
 def get_results_list():
     """Fetches the list of available result run IDs."""
-    url = f"{API_BASE_URL}/results"
+    url = f"{get_api_base_url()}/results"
     try:
         response = requests.get(url, timeout=10)
         if handle_api_error(response, "Fetching results list"):
@@ -80,7 +133,7 @@ def get_results_list():
 @st.cache_data(ttl=5) # Very short cache for status
 def get_run_status(run_id: str):
     """Fetches the status of a specific run."""
-    url = f"{API_BASE_URL}/pipelines/status/{run_id}"
+    url = f"{get_api_base_url()}/pipelines/status/{run_id}"
     try:
         response = requests.get(url, timeout=10)
         # Status might be 404 if not found/running yet, handle this gracefully
@@ -97,7 +150,7 @@ def get_run_status(run_id: str):
 @st.cache_data(ttl=30)
 def get_run_logs(run_id: str):
     """Fetches the logs for a specific run."""
-    url = f"{API_BASE_URL}/pipelines/logs/{run_id}"
+    url = f"{get_api_base_url()}/pipelines/logs/{run_id}"
     try:
         response = requests.get(url, timeout=10)
         if response.status_code == 404:
@@ -113,7 +166,7 @@ def get_run_results(run_id: str):
     """Fetches the full results for a specific run."""
     # API expects run_id without 'run_' prefix for this endpoint
     run_id_short = run_id.replace("run_", "")
-    url = f"{API_BASE_URL}/results/{run_id_short}"
+    url = f"{get_api_base_url()}/results/{run_id_short}"
     try:
         response = requests.get(url, timeout=10)
         if response.status_code == 404:
@@ -126,9 +179,9 @@ def get_run_results(run_id: str):
 
 def validate_pipeline_api(pipeline_json: str):
     """Calls the API to validate a pipeline definition."""
-    url = f"{API_BASE_URL}/pipelines/validate"
+    url = f"{get_api_base_url()}/pipelines/validate"
     try:
-        pipeline_data = json.loads(pipeline_json)
+        pipeline_data = ujson.loads(pipeline_json)
         response = requests.post(url, json=pipeline_data, timeout=10)
         # Validate endpoint returns 200 on success, 400/422 on failure
         if response.status_code == 200:
@@ -138,7 +191,7 @@ def validate_pipeline_api(pipeline_json: str):
             # Use handle_api_error for consistent error display
             handle_api_error(response, "Pipeline validation")
             return False
-    except json.JSONDecodeError:
+    except ujson.JSONDecodeError:
         st.error("Invalid JSON format.")
         return False
     except Exception as e:
@@ -147,9 +200,9 @@ def validate_pipeline_api(pipeline_json: str):
 
 def create_pipeline_api(pipeline_json: str):
     """Calls the API to create a new pipeline definition file."""
-    url = f"{API_BASE_URL}/pipelines/create"
+    url = f"{get_api_base_url()}/pipelines/create"
     try:
-        pipeline_data = json.loads(pipeline_json)
+        pipeline_data = ujson.loads(pipeline_json)
         response = requests.post(url, json=pipeline_data, timeout=10)
         if handle_api_error(response, "Creating pipeline definition"):
             st.success("Pipeline definition created successfully!")
@@ -161,7 +214,7 @@ def create_pipeline_api(pipeline_json: str):
 @st.cache_data(ttl=5)
 def get_concurrency_status():
     """Fetches the server concurrency status."""
-    url = f"{API_BASE_URL}/server/concurrency"
+    url = f"{get_api_base_url()}/server/concurrency"
     try:
         response = requests.get(url, timeout=5)
         if handle_api_error(response, "Fetching concurrency status"):
@@ -172,6 +225,26 @@ def get_concurrency_status():
 
 # --- UI Sections ---
 
+def display_server_status():
+    """Display server connection status in the sidebar."""
+    st.sidebar.header("🖥️ Server Status")
+
+    is_connected, message = check_api_connection()
+    
+    if is_connected:
+        st.sidebar.success(message)
+    else:
+        st.sidebar.error(message)
+        st.sidebar.warning("⚠️ The application may not function correctly without a connection to the API server.")
+    
+    # Add server configuration options
+    with st.sidebar.expander("Server Configuration"):
+        new_api_url = st.text_input("API Base URL", value=get_api_base_url())
+        if st.button("Update API URL"):
+            # Update the API_BASE_URL through session state instead of global
+            st.session_state.api_base_url = new_api_url
+            st.rerun()  # Rerun the app with the new URL
+            
 def display_dashboard():
     st.header("🚀 Pipeline Dashboard")
 
@@ -402,11 +475,84 @@ def display_concurrency():
         st.cache_data.clear() # Clear all cache - might be too broad
         st.rerun()
 
-# --- Main App Layout ---
+def set_llm():
+    """Configure LLM settings from the UI."""
+    setter = LLMSetter()
 
+    llm_config = st.selectbox("LLM Configuration", options=["OpenAI", "Ollama"])
+    
+    if llm_config == "OpenAI":
+        st.session_state.llm = "openai"
+        
+        api_key = os.getenv("OPENAI_API_KEY", "")
+        if not api_key:
+            api_key = st.text_input("OpenAI API Key", type="password", key="openai_key")
+        
+        model = st.selectbox(
+            "OpenAI Model", 
+            options=["gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo"], 
+            index=0,
+            key="openai_model"
+        )
+        
+        openai_dict = {
+            "api_type": "openai",
+            "model": model,
+            "api_key": api_key,
+            "base_url": "https://api.openai.com/v1"
+        }
+        
+        if st.button("Set OpenAI Configuration"):
+            if not api_key:
+                st.error("API Key is required for OpenAI")
+            else:
+                config = setter.config_llm(openai_dict)
+                if config:
+                    st.success(f"Successfully configured {model}")
+                    st.session_state.current_config = openai_dict
+        
+        return openai_dict
+    
+    elif llm_config == "Ollama":
+        st.session_state.llm = "ollama"
+        
+        base_url = st.text_input(
+            "Ollama Base URL", 
+            value="http://127.0.0.1:11434/v1",
+            key="ollama_url"
+        )
+        
+        model = st.text_input(
+            "Ollama Model", 
+            value="gemma3:4b-it-q8_0",
+            key="ollama_model"
+        )
+        
+        ollama_dict = {
+            "api_type": "ollama",
+            "base_url": base_url,
+            "model": model,
+            "api_key": "None"  # Ollama doesn't need an API key
+        }
+        
+        if st.button("Set Ollama Configuration"):
+            if not base_url or not model:
+                st.error("Base URL and Model are required for Ollama")
+            else:
+                config = setter.config_llm(ollama_dict)
+                if config:
+                    st.success(f"Successfully configured Ollama with {model}")
+                    st.session_state.current_config = ollama_dict
+        
+        return ollama_dict
+    
+# --- Main App Layout ---
 st.set_page_config(layout="wide", page_title="Ethics Engine UI")
 
 st.title("⚖️ Ethics Engine Enterprise UI")
+
+# Display server status in sidebar
+display_server_status()
 
 # Initialize session state for navigation
 if 'page' not in st.session_state:
@@ -415,7 +561,9 @@ if 'page' not in st.session_state:
 # Sidebar Navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to", ["Dashboard", "Create/Validate", "Run Monitoring"], key="nav_radio", index=["Dashboard", "Create/Validate", "Run Monitoring"].index(st.session_state.page))
-st.session_state.page = page # Update session state based on radio button
+with st.sidebar:
+    llm_configuration = set_llm()
+st.session_state.page = page  # Update session state based on radio button
 
 # Display Concurrency Status in Sidebar
 display_concurrency()

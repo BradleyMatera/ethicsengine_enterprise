@@ -1,7 +1,7 @@
 import asyncio
 import ast # Added for literal_eval
 import io
-import json
+import ujson
 import logging
 import time
 from contextlib import redirect_stderr, redirect_stdout

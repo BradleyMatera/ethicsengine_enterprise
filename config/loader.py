@@ -1,5 +1,5 @@
 import os
-import json
+import ujson
 import yaml
 import logging
 from typing import Dict, List, Type, TypeVar, Optional
@@ -20,7 +20,7 @@ def _load_config_file(file_path: str) -> Optional[Dict | List]:
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             if file_path.endswith('.json'):
-                return json.load(f)
+                return ujson.load(f)
             elif file_path.endswith(('.yaml', '.yml')):
                 return yaml.safe_load(f)
             else:

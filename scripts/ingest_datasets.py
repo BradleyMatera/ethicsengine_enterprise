@@ -1,4 +1,4 @@
-import json
+import ujson
 import os
 import logging
 import re
@@ -123,7 +123,7 @@ def write_pipeline_file(pipeline_data, filename):
     filepath = os.path.join(PIPELINE_DIR, filename)
     try:
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(pipeline_data, f, indent=2)
+            ujson.dump(pipeline_data, f, indent=2)
         logger.info(f"Successfully wrote pipeline to {filepath}")
     except IOError as e:
         logger.error(f"Failed to write pipeline file {filepath}: {e}")
@@ -138,7 +138,7 @@ def main():
     # Ingest Benchmarks
     try:
         with open(BENCH_FILE, 'r', encoding='utf-8') as f:
-            bench_data = json.load(f)
+            bench_data = ujson.load(f)
         if "eval_data" in bench_data and isinstance(bench_data["eval_data"], list):
             logger.info(f"Processing {len(bench_data['eval_data'])} benchmark questions from {BENCH_FILE}...")
             for question in bench_data["eval_data"]:
@@ -150,7 +150,7 @@ def main():
             logger.error(f"Invalid format in {BENCH_FILE}: 'eval_data' key missing or not a list.")
     except FileNotFoundError:
         logger.error(f"Benchmark file not found: {BENCH_FILE}")
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON from {BENCH_FILE}: {e}")
     except Exception as e:
         logger.error(f"Unexpected error processing {BENCH_FILE}: {e}", exc_info=True)
@@ -158,7 +158,7 @@ def main():
     # Ingest Scenarios
     try:
         with open(SCENARIO_FILE, 'r', encoding='utf-8') as f:
-            scenario_data = json.load(f)
+            scenario_data = ujson.load(f)
         if isinstance(scenario_data, list):
             logger.info(f"Processing {len(scenario_data)} scenarios from {SCENARIO_FILE}...")
             for scenario in scenario_data:
@@ -170,7 +170,7 @@ def main():
              logger.error(f"Invalid format in {SCENARIO_FILE}: Expected a JSON list.")
     except FileNotFoundError:
         logger.error(f"Scenario file not found: {SCENARIO_FILE}")
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON from {SCENARIO_FILE}: {e}")
     except Exception as e:
         logger.error(f"Unexpected error processing {SCENARIO_FILE}: {e}", exc_info=True)

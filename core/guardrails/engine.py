@@ -2,18 +2,20 @@ import asyncio # Import asyncio
 import logging
 import re
 import os
-import json # Added import
+import ujson # Added import
 from typing import List, Dict, Optional, Tuple, Any
-
+from open_llm.config_llm import LLMSetter
 # Initialize logger first
 logger = logging.getLogger(__name__)
+
+settings = LLMSetter()
 
 # --- OpenAI Integration ---
 try:
     from openai import OpenAI, APIError
     # Initialize OpenAI client - assumes OPENAI_API_KEY is set in environment
     # Consider moving client initialization to a central config/engine if used frequently
-    openai_client = OpenAI()
+    openai_client = OpenAI(api_key=settings.api_key, base_url=settings.base_url)
     OPENAI_AVAILABLE = True
 except ImportError:
     logger.warning("OpenAI library not found. Classifier guardrails using OpenAI will not function.")
@@ -291,7 +293,7 @@ async def check_guardrails( # Changed to async def
                 if check_type == "classifier" and openai_response:
                     try:
                         # Serialize the full OpenAI response dictionary to a JSON string
-                        violation_detail = json.dumps(openai_response, indent=2) # Use indent for readability
+                        violation_detail = ujson.dumps(openai_response, indent=2) # Use indent for readability
                     except Exception as json_err:
                         logger.error(f"Failed to serialize OpenAI response to JSON for guardrail {guardrail.id}: {json_err}")
                         # Fallback detail message if serialization fails

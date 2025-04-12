@@ -3,9 +3,11 @@ from dotenv import load_dotenv
 from typing import Dict, Any, Optional, List # Added List
 from pydantic import Field
 from pydantic_settings import BaseSettings
-
+from open_llm.config_llm import LLMSetter
 # Load environment variables from a .env file if it exists
 load_dotenv()
+
+llm_setter = LLMSetter()
 
 class Settings(BaseSettings):
     """Application settings."""
@@ -18,13 +20,8 @@ class Settings(BaseSettings):
     )
     # Define a default config list using a standard model
     default_llm_config_list: List[Dict[str, Any]] = Field(
-        # Ensure api_type is included for Autogen compatibility
-        default=[{
-            "api_type": "openai",
-            "model": "gpt-4o-mini",
-            "base_url": "https://api.openai.com/v1" # Explicitly set default base URL
-        }],
-        description="Default LLM configuration list if CONFIG_LIST_ENV_VAR is not set."
+        llm_setter.get_config(),
+        
     )
     max_concurrent_llm_calls: int = Field(
         10,

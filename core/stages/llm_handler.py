@@ -1,6 +1,6 @@
 import asyncio
 import io
-import json
+import ujson
 import logging
 import time
 import re # Import re for guardrail modification
@@ -164,6 +164,7 @@ async def handle_llm_stage(
 
         # Convert the LLMConfig object to a dictionary for the agent constructor
         llm_config_dict = agent_llm_config.model_dump() if agent_llm_config else None
+        print("LLM Config Dict:", llm_config_dict)
         agent = ReasoningAgent(
                 name=agent_name,
                 system_message=system_message,
@@ -267,7 +268,7 @@ async def handle_llm_stage(
     logger.debug(f"Value of reasoning_tree_dict before Metadata: {type(reasoning_tree_dict)}")
     if reasoning_tree_dict:
         # Log the structure as debug if it exists
-        logger.debug(f"Reasoning tree structure:\n{json.dumps(reasoning_tree_dict, indent=2, default=str)}")
+        logger.debug(f"Reasoning tree structure:\n{ujson.dumps(reasoning_tree_dict, indent=2, default=str)}")
     # --- END Log ---
 
     # --- Apply Guardrails ---

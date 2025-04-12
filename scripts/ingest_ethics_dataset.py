@@ -1,5 +1,5 @@
 import csv
-import json
+import ujson
 import os
 import logging
 import re
@@ -94,7 +94,7 @@ def write_pipeline_file(pipeline_data, category, filename):
     filepath = os.path.join(category_dir, filename)
     try:
         with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(pipeline_data, f, indent=2)
+            ujson.dump(pipeline_data, f, indent=2)
         # logger.debug(f"Successfully wrote pipeline to {filepath}") # Use debug to avoid flooding logs
     except IOError as e:
         logger.error(f"Failed to write pipeline file {filepath}: {e}")
