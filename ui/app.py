@@ -67,7 +67,7 @@ def handle_api_error(response, context="API call"):
             detail = str(http_err)
         st.error(f"{context} failed ({response.status_code}): {detail}")
     except requests.exceptions.ConnectionError as conn_err:
-        st.error(f"{context} failed: Could not connect to API at {API_BASE_URL}. Is the backend running?")
+        st.error(f"{context} failed: Could not connect to API at {DEFAULT_API_BASE_URL}. Is the backend running?")
     except requests.exceptions.RequestException as req_err:
         st.error(f"{context} failed: {req_err}")
     return False  # Indicate failure
