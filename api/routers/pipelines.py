@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status, Body, BackgroundTasks, Pat
 from pathlib import Path
 import logging
 import uuid
-import json
+import ujson
 from enum import Enum
 from typing import List
 
@@ -245,7 +245,7 @@ async def run_existing_pipeline(
         # Validate the loaded data against the Pydantic model
         pipeline = Pipeline.model_validate_json(pipeline_json)
         logger.info(f"Successfully loaded pipeline definition: {pipeline.id}") # Corrected attribute
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON for pipeline definition '{pipeline_name}' at {definition_file}: {e}", exc_info=True)
         raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=f"Invalid JSON format in pipeline definition '{pipeline_name}'.")
     except Exception as e: # Catches Pydantic validation errors and others
@@ -323,7 +323,7 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
     if results_file.exists():
         try:
             with open(results_file, 'r') as f:
-                results_data = json.load(f)
+                results_data = ujson.load(f)
             # Check the 'outcome' field from the Results schema
             outcome = results_data.get("outcome")
             if outcome == "error":
@@ -336,7 +336,7 @@ async def get_pipeline_run_status(run_id: str = FastApiPath(..., title="The ID o
             else: # Handle unexpected or missing outcome field (e.g., "pending" shouldn't be in a saved file)
                  logger.warning(f"Unexpected or missing 'outcome' field ('{outcome}') in results file for {run_id}. Treating as ERROR.")
                  return {"run_id": run_id, "status": PipelineStatus.ERROR}
-        except json.JSONDecodeError as e:
+        except ujson.JSONDecodeError as e:
              logger.error(f"Error decoding results file {results_file} for {run_id}: {e}", exc_info=True)
              return {"run_id": run_id, "status": PipelineStatus.ERROR} # Treat JSON error as run error
         except Exception as e:
@@ -475,14 +475,14 @@ async def get_pipeline_definition(pipeline_id: str = FastApiPath(..., title="The
 
     try:
         with open(definition_file, 'r') as f:
-            pipeline_data = json.load(f)
+            pipeline_data = ujson.load(f)
         # Validate the loaded data against the Pydantic model
         # FastAPI does this automatically if response_model=Pipeline is used,
         # but explicit validation here catches errors before returning.
         pipeline_model = Pipeline(**pipeline_data)
         logger.info(f"Successfully loaded and validated pipeline definition for ID: {pipeline_id}")
         return pipeline_model # Return the Pydantic model instance
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON for pipeline definition '{pipeline_id}' at {definition_file}: {e}", exc_info=True)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Invalid JSON format in pipeline definition '{pipeline_id}'.")
     except Exception as e: # Catches Pydantic validation errors and others

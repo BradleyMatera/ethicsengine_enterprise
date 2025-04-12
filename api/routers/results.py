@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status, Path as FastApiPath
 from pathlib import Path
 import logging
-import json
+import ujson
 from typing import List
 
 # Add project root to path if not already added
@@ -66,7 +66,7 @@ async def get_pipeline_result(run_id: str = FastApiPath(..., title="The ID of th
 
     try:
         with open(results_file, 'r') as f:
-            results_data = json.load(f)
+            results_data = ujson.load(f)
         # Validate the loaded data against the Pydantic model.
         # FastAPI handles this automatically via response_model=Results.
         # If validation fails here, FastAPI returns a 500 error.
@@ -80,7 +80,7 @@ async def get_pipeline_result(run_id: str = FastApiPath(..., title="The ID of th
         results_model = Results(**results_data) # Explicit validation example
         logger.info(f"Successfully loaded and validated results for run_id: {run_id}")
         return results_model # Return the Pydantic model instance
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON for results '{run_id}' at {results_file}: {e}", exc_info=True)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Invalid JSON format in results file for run_id '{run_id}'.")
     except Exception as e: # Catches Pydantic validation errors and others

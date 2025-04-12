@@ -61,6 +61,10 @@ async def read_root():
     """Provides a simple welcome message."""
     return {"message": "Welcome to the Ethics Engine Enterprise API"}
 
+@app.get("/health", tags=["General"])
+async def health_check():
+    """Provides a health check endpoint."""
+    return {"status": "healthy", "version": "0.1.0"}
 
 # --- Application Startup/Shutdown Events (Optional Example) ---
 @app.on_event("startup")

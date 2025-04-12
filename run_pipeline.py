@@ -1,6 +1,5 @@
 import asyncio # Import asyncio
-import asyncio
-import json
+import ujson
 import logging
 import os
 import argparse # Import argparse
@@ -47,14 +46,14 @@ async def main(pipeline_id: str): # Accept pipeline_id as argument
     # 1. Load the pipeline configuration from JSON
     try:
         with open(pipeline_file_path, 'r', encoding='utf-8') as f:
-            pipeline_data = json.load(f)
+            pipeline_data = ujson.load(f)
         # Validate and parse using Pydantic model
         pipeline = Pipeline(**pipeline_data)
         logger.info(f"Successfully loaded and parsed pipeline: {pipeline.id}")
     except FileNotFoundError:
         logger.error(f"Pipeline file not found: {pipeline_file_path}")
         return
-    except json.JSONDecodeError as e:
+    except ujson.JSONDecodeError as e:
         logger.error(f"Error decoding JSON from {pipeline_file_path}: {e}")
         return
     except Exception as e: # Catch Pydantic validation errors or others
