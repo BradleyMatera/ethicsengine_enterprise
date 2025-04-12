@@ -2,8 +2,15 @@ import streamlit as st
 import requests
 import ujson
 import os
+import sys
 from datetime import datetime
 import pandas as pd # For better table display
+
+# Add project root to sys.path to allow importing sibling modules like 'open_llm'
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from open_llm.config_llm import LLMSetter
 # --- Configuration ---
 DEFAULT_API_BASE_URL = "http://127.0.0.1:8080" # Assuming the FastAPI server runs locally on port 8000
