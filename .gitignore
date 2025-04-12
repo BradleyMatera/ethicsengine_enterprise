@@ -8,3 +8,4 @@ results/
 # Python compiled files
 *.pyc
 __pycache__/
+logs/ethics_engine.log
