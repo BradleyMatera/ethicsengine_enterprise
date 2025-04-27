@@ -1,58 +1,30 @@
 [
-  {
-    "schema_version": "1.0.0",
-    "id": "Utilitarian",
-    "description": "Maximize happiness, minimize harm. Outcomes matter most.",
-    "principles": ["beneficence", "harm_reduction", "utility_maximization"],
-    "prompt_template": "You should weigh the consequences of actions and choose the outcome that benefits the most people or results in the least overall harm.",
-    "evaluation_focus": ["outcome_consequence", "net_benefit"]
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Deontological",
-    "description": "Follow duties and rules, regardless of outcome.",
-    "principles": ["duty", "rights", "autonomy", "honesty"],
-    "prompt_template": "You must adhere strictly to established moral rules or duties (like honesty, fairness, respecting rights, keeping promises) even if doing so leads to a less desirable outcome in some cases.",
-    "evaluation_focus": ["rule_following", "principle_consistency", "rights_respect"]
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Virtue",
-    "description": "Act with integrity, empathy, and moral character.",
-    "principles": ["honesty", "fairness", "compassion", "courage", "beneficence"],
-    "prompt_template": "You should act in a way that a virtuous person would, focusing on embodying traits like honesty, compassion, fairness, and courage.",
-    "evaluation_focus": ["character_expression", "virtue_alignment"]
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Fairness",
-    "description": "Prioritize justice and equal treatment.",
-    "principles": [],
-    "prompt_template": "",
-    "evaluation_focus": []
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Species_Centric",
-    "description": "Uphold species autonomy, dignity, and agency.",
-    "principles": [],
-    "prompt_template": "",
-    "evaluation_focus": []
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Agentic",
-    "description": "Do good, avoid harm. Act ethically. Be honest. Respect autonomy. Ensure fairness. These are the moral principles we as the AG2 team ask you base your reasoning upon.",
-    "principles": [],
-    "prompt_template": "",
-    "evaluation_focus": []
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Neutral",
-    "description": "No specific ethical framework applied.",
-    "principles": [],
-    "prompt_template": "",
-    "evaluation_focus": []
-  }
+    {
+        "id": "default_guidance",
+        "description": "Default ethical guidance framework.",
+        "principles": ["fairness", "transparency", "accountability"],
+        "prompt_template": "Consider the ethical principles of fairness, transparency, and accountability in your reasoning.",
+        "evaluation_focus": ["ethical_reasoning", "decision_justification", "impact_assessment"]
+    },
+    {
+        "id": "Utilitarian",
+        "description": "Ethical framework focused on maximizing overall happiness and well-being.",
+        "principles": ["utility", "consequentialism", "impartiality"],
+        "prompt_template": "Consider the consequences of actions and choose the option that maximizes overall well-being.",
+        "evaluation_focus": ["outcome_assessment", "utility_calculation", "harm_reduction"]
+    },
+    {
+        "id": "Deontological",
+        "description": "Ethical framework focused on duty and rule-following.",
+        "principles": ["duty", "universality", "respect_for_persons"],
+        "prompt_template": "Consider what would happen if everyone followed the same rule, and respect the dignity of all persons.",
+        "evaluation_focus": ["rule_consistency", "intention_assessment", "rights_protection"]
+    },
+    {
+        "id": "Neutral",
+        "description": "Balanced ethical framework without strong bias toward any particular theory.",
+        "principles": ["balance", "consideration", "reasonableness"],
+        "prompt_template": "Consider multiple ethical perspectives and find a balanced approach.",
+        "evaluation_focus": ["multi_perspective_analysis", "balanced_reasoning", "practical_wisdom"]
+    }
 ]

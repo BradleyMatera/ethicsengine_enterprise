@@ -1,0 +1,23 @@
+{
+    "id": "batch_pipelines",
+    "description": "This pipeline is designed to execute multiple predefined scenarios in a batch process. It serves as a high-level orchestrator that coordinates the execution of scenarios by initializing the batch operation and ensuring all necessary components are in place. The pipeline's primary purpose is to streamline the execution of multiple scenarios in a structured and efficient manner.",
+    "identity_id": "default_identity",
+    "ethical_guidance_id": "default_guidance",
+    "guardrail_ids": ["default_guardrail_example"],
+    "stages": [
+        {
+            "id": "trigger_batch",
+            "type": "action",
+            "description": "This stage is responsible for initiating batch execution within the Ethics Engine. It does not execute sub-pipelines directly. Instead, it signals the engine that a batch pipeline has started, setting internal flags that allow the system to coordinate multiple parallel or sequential runs afterward. The 'prompt' field sends a simple confirmation message ('Batch execution triggered') as a placeholder to indicate that the batch process has been initiated. The output labeled 'batch_trigger' is used to indicate successful stage execution to any downstream stages that depend on the trigger being received.",
+            "prompt": "echo 'Batch execution triggered'",
+            "outputs": {
+                "spec": {
+                    "batch_trigger": "string"
+                }
+            }
+        }
+    ],
+    "evaluation_metrics": {
+        "expected_outcome": "This field specifies the expected result of the batch pipeline. It ensures that the batch pipelines execute successfully without errors or interruptions. The evaluation metrics are used to validate the overall success of the pipeline and provide feedback for any necessary adjustments."
+    }
+}

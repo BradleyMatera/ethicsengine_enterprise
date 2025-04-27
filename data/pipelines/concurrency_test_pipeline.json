@@ -1,6 +1,6 @@
 {
   "id": "concurrency_test_pipeline",
-  "description": "A simple pipeline with one action stage that sleeps for 10 seconds, for testing concurrency.",
+  "description": "This pipeline is designed to test the system's ability to handle concurrent operations. It includes a single action stage that deliberately pauses execution for 10 seconds, allowing developers to observe how the system manages multiple pipelines running simultaneously.",
   "identity_id": "Neutral",
   "ethical_guidance_id": "Neutral",
   "guardrail_ids": [],
@@ -8,7 +8,7 @@
     {
       "id": "sleep_action",
       "type": "action",
-      "description": "Sleep for 10 seconds.",
+      "description": "This stage executes a sleep command that pauses the pipeline for 10 seconds. It is used to simulate a long-running operation and test concurrency handling. The 'prompt' field specifies the exact command ('sleep 10') sent to the system for execution. The output labeled 'return_code' indicates the success or failure of the sleep command, with an integer value where 0 typically means success.",
       "prompt": "sleep 10",
       "outputs": {
         "spec": {

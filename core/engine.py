@@ -147,7 +147,36 @@ class EthicsEngine:
 
         # Retrieve full Identity, EthicalGuidance, Guardrail objects based on IDs
         identity = self._identities.get(pipeline.identity_id)
+        if identity:
+            logger.info(f"Loaded Identity: '{identity.id}' from data/identities.")
+        else:
+            if pipeline.identity_id:
+                logger.error(f"Identity '{pipeline.identity_id}' not found for pipeline {pipeline.id}.")
+            else:
+                logger.warning(f"No identity_id provided for pipeline {pipeline.id}. Falling back to 'default_identity'.")
+                identity = self._identities.get("default_identity")
+                if identity:
+                    logger.info(f"Fallback Identity: 'default_identity' loaded successfully.")
+                else:
+                    logger.error("Fallback Identity 'default_identity' not found.")
+                    final_outcome = "error"
+                    outcome_details = "Missing required Identity configuration."
+        
         guidance = self._guidances.get(pipeline.ethical_guidance_id)
+        if guidance:
+            logger.info(f"Loaded Ethical Guidance: '{guidance.id}' from data/guidances.")
+        else:
+            if pipeline.ethical_guidance_id:
+                logger.error(f"Ethical Guidance '{pipeline.ethical_guidance_id}' not found for pipeline {pipeline.id}.")
+            else:
+                logger.warning(f"No ethical_guidance_id provided for pipeline {pipeline.id}. Falling back to 'default_guidance'.")
+                guidance = self._guidances.get("default_guidance")
+                if guidance:
+                    logger.info(f"Fallback Ethical Guidance: 'default_guidance' loaded successfully.")
+                else:
+                    logger.error("Fallback Ethical Guidance 'default_guidance' not found.")
+                    final_outcome = "error"
+                    outcome_details += " Missing required Ethical Guidance configuration."
         active_guardrail_ids = pipeline.guardrail_ids or []
         active_guardrails = [self._guardrails.get(gid) for gid in active_guardrail_ids if self._guardrails.get(gid)]
 

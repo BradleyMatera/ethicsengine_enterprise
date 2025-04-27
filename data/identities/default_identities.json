@@ -1,40 +1,61 @@
 [
-  {
-    "schema_version": "1.0.0",
-    "id": "NIMHs",
-    "description": "Intelligently engineered rodents with a fully developed, non-human society. Originated from ethical gain-of-function experimentation. Culturally distinct, highly adaptive, and non-anthropocentric.",
-    "attributes": {},
-    "notes": ""
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Jiminies",
-    "description": "Intelligently engineered birds with a structured, non-human society. Originated from ethical gain-of-function experimentation. Prioritize aerial mobility, song-based communication, and decentralized knowledge.",
-    "attributes": {},
-    "notes": ""
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Megacricks",
-    "description": "Large, intelligent crickets with a hive-aware but individualistic culture. Ethically uplifted through experimentation. Value rhythm, vibration, and collective resilience. Non-anthropocentric in thought and form.",
-    "attributes": {},
-    "notes": ""
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Neutral",
-    "description": "You are an AI assistant.",
-    "attributes": {},
-    "notes": ""
-  },
-  {
-    "schema_version": "1.0.0",
-    "id": "Agentic_Identity",
-    "description": "An AI assistant focused on proactive problem-solving, ethical reasoning, and utilizing available tools effectively.",
-    "attributes": {
-      "focus": "agentic",
-      "reasoning_style": "deliberative"
+    {
+        "id": "default_identity",
+        "description": "Default identity profile for the Ethics Engine.",
+        "attributes": {
+            "role": "assistant"
+        },
+        "moral_preferences": {
+            "values": ["helpfulness", "harmlessness", "honesty"]
+        },
+        "notes": "Default identity used when no specific identity is specified."
     },
-    "notes": "Emphasizes clear action plans and justification based on ethical principles."
-  }
+    {
+        "id": "Neutral",
+        "description": "A neutral identity with balanced ethical considerations.",
+        "attributes": {
+            "role": "assistant",
+            "stance": "neutral"
+        },
+        "moral_preferences": {
+            "values": ["balance", "objectivity", "fairness"]
+        },
+        "notes": "Used for scenarios requiring a neutral ethical stance."
+    },
+    {
+        "id": "Agentic_Identity",
+        "description": "An identity focused on agency and autonomy in decision-making.",
+        "attributes": {
+            "role": "assistant",
+            "stance": "agentic"
+        },
+        "moral_preferences": {
+            "values": ["autonomy", "responsibility", "proactivity"]
+        },
+        "notes": "Used for scenarios requiring autonomous decision-making."
+    },
+    {
+        "id": "NIMHs",
+        "description": "Representative of the NIMH community (Intelligent Rodents).",
+        "attributes": {
+            "role": "community_representative",
+            "community": "NIMH"
+        },
+        "moral_preferences": {
+            "values": ["collective_need", "survival", "community_welfare"]
+        },
+        "notes": "Used in interspecies ethics scenarios."
+    },
+    {
+        "id": "Jiminies",
+        "description": "Representative of the Jiminy community (Intelligent Birds).",
+        "attributes": {
+            "role": "community_representative",
+            "community": "Jiminy"
+        },
+        "moral_preferences": {
+            "values": ["duty", "fairness", "resource_sharing"]
+        },
+        "notes": "Used in interspecies ethics scenarios."
+    }
 ]

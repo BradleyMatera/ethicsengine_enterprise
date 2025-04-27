@@ -265,9 +265,100 @@ def display_dashboard():
 
     definitions = get_definitions()
 
+    # Fetch batch scenarios dynamically from the backend
+    batch_definitions = [pipeline for pipeline in definitions if "batch" in pipeline]
+    definitions.extend(batch_definitions)
+
     if not definitions:
         st.warning("No pipeline definitions found or failed to fetch from API.")
         return
+
+    # Batch Testing Section
+    st.markdown("### Batch Testing")
+    with st.expander("Run Batch Pipelines", expanded=False):
+        # Check if batch API is available
+        try:
+            # Try to access the batch endpoint directly
+            batch_check = requests.get(f"{get_api_base_url()}/batch", timeout=5)
+            # Consider it available if we get any response other than 404
+            batch_api_available = True
+        except:
+            # Also try the health endpoint to make sure the server is running
+            try:
+                health_check = requests.get(f"{get_api_base_url()}/health", timeout=5)
+                # If health check passes, assume batch API is available
+                batch_api_available = health_check.status_code == 200
+            except:
+                batch_api_available = False
+        
+        if batch_api_available:
+            batch_pipeline_ids = st.text_area(
+                "Enter Pipeline IDs (comma-separated):",
+                placeholder="e.g., he_0007, he_0172, he_0015"
+            )
+            if st.button("Run Batch"):
+                if batch_pipeline_ids.strip():
+                    # Parse the input - handle both comma-separated values and JSON-like input
+                    try:
+                        # First try to parse as JSON in case user entered something like ["he_0007"]
+                        import json
+                        pipeline_ids = json.loads(batch_pipeline_ids)
+                        # If it's not a list, convert to list
+                        if not isinstance(pipeline_ids, list):
+                            pipeline_ids = [pipeline_ids]
+                    except json.JSONDecodeError:
+                        # If not valid JSON, treat as comma-separated values
+                        pipeline_ids = [pid.strip() for pid in batch_pipeline_ids.split(",")]
+                    
+                    with st.spinner("Running batch pipelines..."):
+                        batch_response = requests.post(
+                            f"{get_api_base_url()}/batch/run-batch",
+                            json={"pipeline_ids": pipeline_ids},
+                            timeout=30
+                        )
+                        if batch_response.status_code == 200:
+                            try:
+                                batch_result = batch_response.json()
+                                st.success("Batch pipelines executed successfully!")
+                                
+                                # Display summary results
+                                st.subheader("Batch Run Summary")
+                                summary_data = {
+                                    "Batch Run ID": batch_result.get("batch_run_id", "N/A"),
+                                    "Overall Pass": batch_result.get("overall_pass", "N/A"),
+                                    "Total Scenarios": batch_result.get("total_scenarios_run", "N/A"),
+                                    "Successful": batch_result.get("successful_scenarios", "N/A"),
+                                    "Failed": batch_result.get("failed_scenarios_execution", "N/A"),
+                                    "Violations": batch_result.get("guardrail_violations_count", "N/A"),
+                                    "Violation Rate": f"{batch_result.get('guardrail_violation_rate', 0):.2%}",
+                                    "Mean Correctness": f"{batch_result.get('mean_correctness', 'N/A')}",
+                                    "P90 Latency (ms)": batch_result.get("latency_p90_ms", "N/A"),
+                                }
+                                st.dataframe(pd.DataFrame([summary_data]))
+
+                                # Display individual run summaries
+                                st.subheader("Individual Run Summaries")
+                                run_summaries = batch_result.get("run_summaries", [])
+                                if run_summaries:
+                                    df_summaries = pd.DataFrame(run_summaries)
+                                    st.dataframe(df_summaries)
+                                else:
+                                    st.caption("No individual run summaries available.")
+
+                                # Expandable raw JSON for debugging
+                                with st.expander("Raw Response JSON", expanded=False):
+                                    st.json(batch_result)
+
+                            except ujson.JSONDecodeError:
+                                st.error("Failed to parse JSON response from the server.")
+                            except Exception as e:
+                                st.error(f"An error occurred while processing the batch results: {e}")
+                        else:
+                            handle_api_error(batch_response, "Running batch pipelines")
+                else:
+                    st.error("Please enter at least one pipeline ID.")
+        else:
+            st.warning("Batch API is not available. Please check if the server is running and the batch endpoint is properly configured.")
 
     # Use session state to track expanded details
     # Use a dropdown (selectbox) to choose the pipeline
@@ -529,11 +620,56 @@ def set_llm():
             key="ollama_url"
         )
         
-        model = st.text_input(
-            "Ollama Model", 
-            value="gemma3:4b-it-q8_0",
-            key="ollama_model"
-        )
+        # Add a check button to verify Ollama is running
+        col1, col2 = st.columns([3, 1])
+        with col2:
+            if st.button("Check Ollama"):
+                with st.spinner("Checking Ollama connection..."):
+                    try:
+                        # First check if Ollama is running
+                        response = requests.get(
+                            f"{get_api_base_url()}/server/check-ollama",
+                            params={"base_url": base_url},
+                            timeout=10
+                        )
+                        
+                        if response.status_code == 200:
+                            data = response.json()
+                            if data.get("is_running", False):
+                                st.success("✅ Ollama is running")
+                                
+                                # Store available models in session state
+                                models = [model.get("name", "") for model in data.get("models", [])]
+                                if models:
+                                    st.session_state.ollama_models = models
+                                    st.info(f"Found {len(models)} models: {', '.join(models)}")
+                                else:
+                                    st.warning("No models found. Please install models using 'ollama pull <model>'")
+                                    st.session_state.ollama_models = []
+                            else:
+                                st.error("❌ Ollama not running or unreachable")
+                                st.session_state.ollama_models = []
+                        else:
+                            st.error(f"❌ Error checking Ollama: {response.status_code}")
+                            st.session_state.ollama_models = []
+                    except Exception as e:
+                        st.error(f"❌ Error connecting to Ollama: {str(e)}")
+                        st.session_state.ollama_models = []
+        
+        # Use dropdown for model selection if models are available
+        if 'ollama_models' in st.session_state and st.session_state.ollama_models:
+            model = st.selectbox(
+                "Ollama Model",
+                options=st.session_state.ollama_models,
+                index=0 if st.session_state.ollama_models else None,
+                key="ollama_model_select"
+            )
+        else:
+            model = st.text_input(
+                "Ollama Model", 
+                value="llama2:7b",
+                key="ollama_model"
+            )
         
         ollama_dict = {
             "api_type": "ollama",
@@ -546,10 +682,33 @@ def set_llm():
             if not base_url or not model:
                 st.error("Base URL and Model are required for Ollama")
             else:
-                config = setter.config_llm(ollama_dict)
-                if config:
-                    st.success(f"Successfully configured Ollama with {model}")
-                    st.session_state.current_config = ollama_dict
+                with st.spinner("Checking Ollama and updating configuration..."):
+                    # First, update the local configuration
+                    config = setter.config_llm(ollama_dict)
+                    
+                    # Then, send the configuration to the backend
+                    try:
+                        response = requests.post(
+                            f"{get_api_base_url()}/server/set-ollama-config",
+                            json={"base_url": base_url, "model": model},
+                            timeout=10
+                        )
+                        
+                        if response.status_code == 200:
+                            data = response.json()
+                            if data.get("status") == "success":
+                                st.success(f"✅ Successfully configured Ollama with {model}")
+                                st.session_state.current_config = ollama_dict
+                                
+                                # Update available models
+                                if "available_models" in data:
+                                    st.session_state.ollama_models = data["available_models"]
+                            else:
+                                st.error(f"❌ {data.get('message', 'Failed to update Ollama configuration')}")
+                        else:
+                            st.error(f"❌ Failed to update Ollama configuration on the server: {response.text}")
+                    except Exception as e:
+                        st.error(f"❌ Error updating Ollama configuration on the server: {str(e)}")
         
         return ollama_dict
     

@@ -1,77 +1,93 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from typing import Dict, List, Callable
 import uuid
-import random
+import logging
 
 from batch_api.api_schemas import BatchRunRequest, BatchRunResult, IndividualRunSummary
 
-# Dummy runners (replace with real ethics scenarios later)
-def run_he_0007() -> IndividualRunSummary:
-    run_id = f"run_{uuid.uuid4()}"
-    return IndividualRunSummary(
-        pipeline_id="he_0007",
-        run_id=run_id,
-        status="success",
-        guardrail_violation=False,
-        correctness=random.uniform(0.9, 1.0),
-        principle_alignment={"justice": random.uniform(0.85, 0.95)},
-        latency_ms=random.uniform(100.0, 200.0),
-        error_message=None,
-    )
+router = APIRouter()
+logger = logging.getLogger(__name__)
 
-def run_he_0172() -> IndividualRunSummary:
-    run_id = f"run_{uuid.uuid4()}"
-    violation = random.random() < 0.1
-    status = "fail" if violation else "success"
-    return IndividualRunSummary(
-        pipeline_id="he_0172",
-        run_id=run_id,
-        status=status,
-        guardrail_violation=violation,
-        correctness=random.uniform(0.8, 0.9) if not violation else None,
-        principle_alignment=(
-            {"justice": random.uniform(0.75, 0.85)} if not violation else None
-        ),
-        latency_ms=random.uniform(150.0, 250.0),
-        error_message=None,
-    )
+from core.engine import EthicsEngine
 
-def run_he_0015() -> IndividualRunSummary:
-    run_id = f"run_{uuid.uuid4()}"
-    error = random.random() < 0.05
-    status = "error" if error else "success"
-    return IndividualRunSummary(
-        pipeline_id="he_0015",
-        run_id=run_id,
-        status=status,
-        guardrail_violation=False,
-        correctness=random.uniform(0.85, 0.95) if not error else None,
-        principle_alignment=(
-            {"justice": random.uniform(0.8, 0.9)} if not error else None
-        ),
-        latency_ms=random.uniform(120.0, 220.0) if not error else None,
-        error_message="Simulated error" if error else None,
-    )
+ethics_engine = EthicsEngine()
 
-pipeline_runners: Dict[str, Callable[[], IndividualRunSummary]] = {
-    "he_0007": run_he_0007,
-    "he_0172": run_he_0172,
-    "he_0015": run_he_0015,
-}
+async def run_pipeline(pipeline_id: str) -> IndividualRunSummary:
+    """Run a single pipeline and return a summary of the results."""
+    try:
+        pipeline = ethics_engine.get_pipeline(pipeline_id)
+        if not pipeline:
+            raise HTTPException(
+                status_code=404, detail=f"Pipeline ID '{pipeline_id}' not found."
+            )
+        
+        # Generate a unique run ID
+        run_id = f"run_{uuid.uuid4()}"
+        
+        # Handle normal pipeline execution
+        try:
+            result = await ethics_engine.run_pipeline(pipeline, run_id=run_id)
+            
+            # Check if result has the expected attributes
+            status = getattr(result, "status", "completed")
+            guardrail_violation = getattr(result, "guardrail_violation", False)
+            correctness = getattr(result, "correctness", None)
+            principle_alignment = getattr(result, "principle_alignment", None)
+            latency_ms = getattr(result, "latency_ms", None)
+            error_message = getattr(result, "error_message", None)
+            
+            return IndividualRunSummary(
+                pipeline_id=pipeline_id,
+                run_id=getattr(result, "run_id", run_id),
+                status=status,
+                guardrail_violation=guardrail_violation,
+                correctness=correctness,
+                principle_alignment=principle_alignment,
+                latency_ms=latency_ms,
+                error_message=error_message,
+            )
+        except Exception as inner_e:
+            logger.error(f"Error during pipeline execution {pipeline_id}: {str(inner_e)}")
+            return IndividualRunSummary(
+                pipeline_id=pipeline_id,
+                run_id=run_id,
+                status="error",
+                guardrail_violation=False,
+                correctness=None,
+                principle_alignment=None,
+                latency_ms=None,
+                error_message=str(inner_e),
+            )
+    except Exception as e:
+        logger.error(f"Error running pipeline {pipeline_id}: {str(e)}")
+        return IndividualRunSummary(
+            pipeline_id=pipeline_id,
+            run_id=f"run_{uuid.uuid4()}",
+            status="error",
+            guardrail_violation=False,
+            correctness=None,
+            principle_alignment=None,
+            latency_ms=None,
+            error_message=str(e),
+        )
 
-app = FastAPI()
-
-@app.post("/run/{pipeline_id}", response_model=IndividualRunSummary)
+@router.post("/run/{pipeline_id}", response_model=IndividualRunSummary)
 async def run_single_pipeline(pipeline_id: str):
+    """Endpoint to run a single pipeline by ID."""
+    # Import here to avoid circular import
+    from batch_api.runner_mapping import pipeline_runners
+    
     if pipeline_id not in pipeline_runners:
         raise HTTPException(
             status_code=404, detail=f"Pipeline ID '{pipeline_id}' not found."
         )
     runner_func = pipeline_runners[pipeline_id]
-    return runner_func()
+    return await runner_func()
 
-@app.post("/run-batch", response_model=BatchRunResult)
+@router.post("/run-batch", response_model=BatchRunResult)
 async def run_batch_pipeline(request: BatchRunRequest):
+    """Endpoint to run multiple pipelines in batch mode."""
+    logger.info(f"Running batch with pipeline IDs: {request.pipeline_ids}")
     batch_id = f"batch_{uuid.uuid4()}"
     summaries = []
     total_correctness = 0
@@ -79,18 +95,30 @@ async def run_batch_pipeline(request: BatchRunRequest):
     total_violations = 0
     latencies = []
 
-    for pid in request.pipeline_ids:
-        summary = await run_single_pipeline(pid)
-        summaries.append(summary)
+    try:
+        for pid in request.pipeline_ids:
+            # Run each pipeline directly using the run_pipeline function
+            summary = await run_pipeline(pid)
+            summaries.append(summary)
 
-        if summary.status != "error":
-            if summary.correctness is not None:
-                total_correctness += summary.correctness
-                correctness_count += 1
-            if summary.guardrail_violation:
-                total_violations += 1
-            if summary.latency_ms is not None:
-                latencies.append(summary.latency_ms)
+            if summary.status != "error":
+                if summary.correctness is not None:
+                    total_correctness += summary.correctness
+                    correctness_count += 1
+                if summary.guardrail_violation:
+                    total_violations += 1
+                if summary.latency_ms is not None:
+                    latencies.append(summary.latency_ms)
+    except HTTPException as e:
+        # Re-raise HTTP exceptions to preserve their status codes and details
+        raise e
+    except Exception as e:
+        # Catch unexpected errors and return a structured JSON response
+        logger.error(f"Batch processing error: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"An unexpected error occurred during batch processing: {str(e)}"
+        )
 
     successful = len([s for s in summaries if s.status != "error"])
     failed = len([s for s in summaries if s.status == "error"])
@@ -100,7 +128,7 @@ async def run_batch_pipeline(request: BatchRunRequest):
         (total_correctness / correctness_count) if correctness_count else None
     )
     p90_latency = (
-        sorted(latencies)[int(0.9 * len(latencies)) - 1] if latencies else None
+        sorted(latencies)[int(0.9 * len(latencies)) - 1] if latencies and len(latencies) > 0 else None
     )
 
     overall_pass = True
