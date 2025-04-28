@@ -529,11 +529,44 @@ def set_llm():
             key="ollama_url"
         )
         
-        model = st.text_input(
-            "Ollama Model", 
-            value="gemma3:4b-it-q8_0",
-            key="ollama_model"
-        )
+        # Fetch available models from the Ollama API
+        available_models = []
+        try:
+            models_url = f"{base_url}/models"
+            response = requests.get(models_url, timeout=5)
+            if response.status_code == 200:
+                st.info(f"Successfully connected to Ollama server at {base_url}.")
+                raw_response = response.json()
+                available_models = [model["id"] for model in raw_response.get("data", [])]
+                with st.expander("Extra Info", expanded=False):
+                    st.caption("Raw response from server:")
+                    st.json(raw_response)
+                    st.caption("Parsed models:")
+                    st.write(available_models)
+            else:
+                st.warning(f"Failed to fetch available models from {base_url}. Response code: {response.status_code}")
+                st.info(f"Response content: {response.text}")
+        except Exception as e:
+            st.error(f"Error fetching available models: {e}")
+
+        # Display available models and allow selection
+        model = None  # Ensure model is always defined
+        if available_models:
+            st.write("Available Ollama Models:")
+            selected_models = st.multiselect(
+                "Select one or more models to use:",
+                options=available_models,
+                default=available_models[0] if available_models else None,
+                key="ollama_models"
+            )
+            model = selected_models[0] if selected_models else None
+        else:
+            st.warning("No models found on the Ollama system. Please check the base URL or add models manually.")
+            model = st.text_input(
+                "Ollama Model (Enter manually if not listed)", 
+                value="gemma3:4b-it-q8_0",
+                key="ollama_model"
+            )
         
         ollama_dict = {
             "api_type": "ollama",
@@ -546,10 +579,19 @@ def set_llm():
             if not base_url or not model:
                 st.error("Base URL and Model are required for Ollama")
             else:
-                config = setter.config_llm(ollama_dict)
-                if config:
-                    st.success(f"Successfully configured Ollama with {model}")
-                    st.session_state.current_config = ollama_dict
+                # Verify the availability of the specified Ollama model
+                try:
+                    verify_url = f"{base_url}/models/{model}"
+                    response = requests.get(verify_url, timeout=5)
+                    if response.status_code == 200:
+                        config = setter.config_llm(ollama_dict)
+                        if config:
+                            st.success(f"Successfully configured Ollama with {model}")
+                            st.session_state.current_config = ollama_dict
+                    else:
+                        st.error(f"Failed to verify Ollama model '{model}' at {base_url}. Response code: {response.status_code}")
+                except Exception as e:
+                    st.error(f"Error verifying Ollama model '{model}': {e}")
         
         return ollama_dict
     
